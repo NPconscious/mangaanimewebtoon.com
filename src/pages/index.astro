@@ -7,14 +7,14 @@ import Card from '../components/ui/Card.astro';
 <Layout title="Manga Anime Webtoon">
   
   <!-- Hero Section -->
-  <section class="relative w-full overflow-hidden bg-gradient-to-br from-[#f8fbff] via-[#fdf7ff] to-[#fff4f3] py-section px-lg flex flex-col items-center text-center">
-    <!-- Background glow -->
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      <div class="absolute -top-24 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#7b61ff]/10 blur-3xl"></div>
-      <div class="absolute top-16 right-10 h-[360px] w-[360px] rounded-full bg-[#00c4ff]/10 blur-3xl"></div>
+  <section class="relative w-full overflow-hidden bg-canvas py-section px-lg flex flex-col items-center text-center">
+    <!-- Mesh Gradient Background (Vercel Inspired) -->
+    <div class="absolute inset-0 z-0 opacity-40 pointer-events-none overflow-hidden flex justify-center">
+      <div class="absolute top-[-10%] w-[800px] h-[400px] bg-gradient-to-r from-[var(--color-gradient-develop-start)] via-[var(--color-gradient-preview-start)] to-[var(--color-gradient-ship-start)] blur-[100px] rounded-full mix-blend-multiply"></div>
+      <div class="absolute top-[10%] w-[600px] h-[300px] bg-gradient-to-r from-[var(--color-gradient-develop-end)] via-[var(--color-gradient-preview-end)] to-[var(--color-gradient-ship-end)] blur-[80px] rounded-full mix-blend-multiply opacity-70"></div>
     </div>
 
-    <div class="relative z-10 max-w-[900px] flex flex-col items-center gap-md rounded-[40px] border border-white/70 bg-white/80 p-[40px] shadow-[0_30px_120px_-80px_rgba(15,23,42,0.18)] backdrop-blur-xl">
+    <div class="relative z-10 max-w-[800px] flex flex-col items-center gap-md">
       <div class="inline-flex items-center gap-2 rounded-full border border-hairline bg-white/90 px-sm py-xs text-body-sm font-semibold text-ink shadow-sm backdrop-blur">
         <span>✨</span>
         <span>New Season Announcements</span>
