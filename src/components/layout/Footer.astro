@@ -1,46 +1,39 @@
 ---
 ---
 
-<footer class="bg-canvas text-body py-4xl px-lg border-t border-hairline mt-auto">
-  <div class="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-xl">
-    
-    <div class="flex flex-col gap-sm">
-      <h3 class="font-mono text-caption uppercase tracking-wider text-ink mb-xs">Content</h3>
-      <a href="/news" class="text-body-sm hover:text-link transition-colors">Latest News</a>
-      <a href="/reviews" class="text-body-sm hover:text-link transition-colors">Reviews</a>
-      <a href="/webtoons" class="text-body-sm hover:text-link transition-colors">Webtoon Discoveries</a>
-      <a href="/trending" class="text-body-sm hover:text-link transition-colors">Trending Now</a>
+<footer class="bg-white/95 text-body py-4xl px-lg border-t border-hairline shadow-inner mt-auto">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="mb-lg">
+      <div class="text-ink font-semibold text-lg">Manga Anime Webtoon</div>
     </div>
 
-    <div class="flex flex-col gap-sm">
-      <h3 class="font-mono text-caption uppercase tracking-wider text-ink mb-xs">Community</h3>
-      <a href="#" class="text-body-sm hover:text-link transition-colors">Forums</a>
-      <a href="#" class="text-body-sm hover:text-link transition-colors">Discord Server</a>
-      <a href="#" class="text-body-sm hover:text-link transition-colors">Twitter / X</a>
-      <a href="#" class="text-body-sm hover:text-link transition-colors">Submit a Tip</a>
-    </div>
-
-    <div class="flex flex-col gap-sm">
-      <h3 class="font-mono text-caption uppercase tracking-wider text-ink mb-xs">Legal</h3>
-      <a href="/privacy" class="text-body-sm hover:text-link transition-colors">Privacy Policy</a>
-      <a href="/terms" class="text-body-sm hover:text-link transition-colors">Terms of Service</a>
-      <a href="/cookie" class="text-body-sm hover:text-link transition-colors">Cookie Policy</a>
-    </div>
-
-    <div class="flex flex-col gap-sm">
-      <div class="flex items-center gap-xs mb-xs">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L2 19.7778H22L12 2Z" fill="currentColor"/>
-        </svg>
-        <span class="text-ink font-semibold">Manga Anime Webtoon</span>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-xl mb-4xl">
+      <div class="flex flex-col gap-md">
+        <a href="mailto:admin@mangaanimewebtoon.com" class="text-link hover:underline text-body-sm">admin@mangaanimewebtoon.com</a>
       </div>
-      <p class="text-caption text-mute">
-        Your ultimate source for anime, manga, and webtoon news. Built with Astro and Tailwind CSS.
-      </p>
-      <p class="text-caption text-mute mt-md">
-        © {new Date().getFullYear()} MAW. All rights reserved.
-      </p>
+
+      <div class="flex flex-col gap-md">
+        <h3 class="font-mono text-caption uppercase tracking-wider text-ink mb-xs">Official Platforms</h3>
+        <ul class="space-y-xs text-body-sm">
+          <li><a href="https://www.crunchyroll.com" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">Crunchyroll</a></li>
+          <li><a href="https://www.viz.com" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">VIZ Media</a></li>
+          <li><a href="https://www.webtoons.com" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">WEBTOON</a></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-md">
+        <h3 class="font-mono text-caption uppercase tracking-wider text-ink mb-xs">Explore</h3>
+        <ul class="space-y-xs text-body-sm">
+          <li><a href="/news" class="text-link hover:underline">News</a></li>
+          <li><a href="/reviews" class="text-link hover:underline">Reviews</a></li>
+          <li><a href="/webtoons" class="text-link hover:underline">Webtoons</a></li>
+          <li><a href="/trending" class="text-link hover:underline">Trending</a></li>
+        </ul>
+      </div>
     </div>
-    
+
+    <div class="border-t border-hairline pt-md text-caption text-mute">
+      © {new Date().getFullYear()} MAW. All rights reserved.
+    </div>
   </div>
 </footer>

@@ -2,102 +2,114 @@
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
-import Badge from '../components/ui/Badge.astro';
-import { getCollection } from 'astro:content';
-
-const allNews = await getCollection('news');
-const latestNews = allNews.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).slice(0, 3);
 ---
 
 <Layout title="Manga Anime Webtoon">
   
   <!-- Hero Section -->
-  <section class="relative w-full overflow-hidden bg-canvas py-section px-lg flex flex-col items-center text-center">
-    <!-- Mesh Gradient Background (Vercel Inspired) -->
-    <div class="absolute inset-0 z-0 opacity-40 pointer-events-none overflow-hidden flex justify-center">
-      <div class="absolute top-[-10%] w-[800px] h-[400px] bg-gradient-to-r from-[var(--color-gradient-develop-start)] via-[var(--color-gradient-preview-start)] to-[var(--color-gradient-ship-start)] blur-[100px] rounded-full mix-blend-multiply"></div>
-      <div class="absolute top-[10%] w-[600px] h-[300px] bg-gradient-to-r from-[var(--color-gradient-develop-end)] via-[var(--color-gradient-preview-end)] to-[var(--color-gradient-ship-end)] blur-[80px] rounded-full mix-blend-multiply opacity-70"></div>
+  <section class="relative w-full overflow-hidden bg-gradient-to-br from-[#f8fbff] via-[#fdf7ff] to-[#fff4f3] py-section px-lg flex flex-col items-center text-center">
+    <!-- Background glow -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <div class="absolute -top-24 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#7b61ff]/10 blur-3xl"></div>
+      <div class="absolute top-16 right-10 h-[360px] w-[360px] rounded-full bg-[#00c4ff]/10 blur-3xl"></div>
     </div>
 
-    <div class="relative z-10 max-w-[800px] flex flex-col items-center gap-md">
-      <Badge class="mb-sm">✨ New Season Announcements</Badge>
+    <div class="relative z-10 max-w-[900px] flex flex-col items-center gap-md rounded-[40px] border border-white/70 bg-white/80 p-[40px] shadow-[0_30px_120px_-80px_rgba(15,23,42,0.18)] backdrop-blur-xl">
+      <div class="inline-flex items-center gap-2 rounded-full border border-hairline bg-white/90 px-sm py-xs text-body-sm font-semibold text-ink shadow-sm backdrop-blur">
+        <span>✨</span>
+        <span>New Season Announcements</span>
+      </div>
       <h1 class="text-display-xl font-semibold tracking-[-2.4px] text-ink max-w-[15ch]">
         The heartbeat of anime and manga culture...
       </h1>
       <p class="text-body-lg text-body max-w-[600px]">
         Discover the latest breaking news, deep-dive reviews, and webtoon recommendations tailored for the ultimate fan experience.
       </p>
-      <div class="flex items-center gap-sm mt-lg">
-        <Button variant="primary" size="lg" href="/news">Start Reading</Button>
-        <Button variant="secondary" size="lg" href="/trending">Trending Now</Button>
-      </div>
     </div>
   </section>
 
-  <!-- Latest News Section -->
-  <section class="w-full bg-canvas-soft py-5xl px-lg">
-    <div class="max-w-[1400px] mx-auto flex flex-col gap-xl">
-      <div class="flex flex-col gap-xs">
-        <h2 class="font-mono text-caption uppercase tracking-wider text-mute">Latest Coverage</h2>
-        <h3 class="text-display-lg font-semibold tracking-[-1.28px] text-ink">Breaking News</h3>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
-        {latestNews.map((post) => (
-          <Card variant="marketing" href={`/news/${post.id}`} class="group">
-            <div class="flex flex-col gap-md h-full">
-              <div class="flex items-center gap-xs">
-                {post.data.tags.slice(0, 2).map((tag) => (
-                  <Badge>{tag}</Badge>
-                ))}
-              </div>
-              <h4 class="text-display-sm font-semibold tracking-[-0.6px] text-ink group-hover:text-link transition-colors">
-                {post.data.title}
-              </h4>
-              <p class="text-body-sm text-body line-clamp-3">
-                {post.data.description}
+  <!-- Section Previews -->
+  <section class="w-full bg-transparent py-5xl px-lg">
+    <div class="max-w-[1400px] mx-auto rounded-[40px] border border-white/60 bg-white/80 p-lg shadow-[0_40px_120px_-80px_rgba(15,23,42,0.15)] backdrop-blur-xl flex flex-col gap-xl">
+      <Card class="p-lg border border-hairline bg-white shadow-[0_24px_48px_-28px_rgba(15,23,42,0.35)] w-full">
+        <div class="flex flex-col gap-lg lg:flex-row lg:items-start">
+          <div class="overflow-hidden rounded-[28px] border border-slate-200 lg:w-[320px] w-full h-[320px] bg-canvas">
+            <img src="/latest-anouncement.jpg" alt="Latest announcement" class="h-full w-full object-cover" />
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <p class="font-mono text-caption uppercase tracking-wider text-indigo-500">News</p>
+              <h2 class="text-display-sm font-semibold text-ink">Latest announcements</h2>
+              <p class="text-body-sm text-body text-mute mt-sm">
+                Stay updated with release dates, studio news, and major anime industry stories.<br />
+                Get fast summaries from the biggest announcements.<br />
+                Perfect for fans tracking new season updates.
               </p>
-              <div class="mt-auto flex items-center justify-between text-caption text-mute pt-md border-t border-hairline">
-                <span>{post.data.author}</span>
-                <span>{new Date(post.data.pubDate).toLocaleDateString()}</span>
-              </div>
             </div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Webtoons Showcase Section (Dark Polarity Flip) -->
-  <section class="w-full bg-primary py-5xl px-lg">
-    <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row gap-4xl items-center">
-      <div class="flex-1 flex flex-col gap-md">
-        <h2 class="font-mono text-caption uppercase tracking-wider text-mute">Webtoon Discovery</h2>
-        <h3 class="text-display-lg font-semibold tracking-[-1.28px] text-on-primary">
-          A new era of vertical scrolling.
-        </h3>
-        <p class="text-body-lg text-body text-[var(--color-mute)]">
-          Explore our curated lists of the most gripping webtoons hitting the digital shelves this month.
-        </p>
-        <div class="mt-md">
-          <Button variant="secondary" size="lg" href="/webtoons">Explore Webtoons</Button>
-        </div>
-      </div>
-      <div class="flex-1 w-full relative">
-        <div class="bg-canvas-soft-2 p-lg rounded-lg shadow-2xl relative overflow-hidden h-[400px] w-full border border-[#333]">
-          <div class="p-md">
-            <h4 class="font-semibold text-ink mb-sm">Featured Webtoons</h4>
-            <ul class="list-disc list-inside text-body-sm text-body text-mute space-y-2">
-              <li>Lore of the Fallen</li>
-              <li>Neon Alley</li>
-              <li>Midnight Delivery</li>
-              <li>Cherry Blossom Days</li>
-              <li>Cyber Cafe Chronicles</li>
-            </ul>
+            <Button href="/news" variant="secondary" size="sm">View News</Button>
           </div>
         </div>
-      </div>
+      </Card>
+
+      <Card class="p-lg border border-indigo-100 bg-[#eef2ff] shadow-[0_20px_50px_-32px_rgba(99,102,241,0.45)] w-full">
+        <div class="flex flex-col gap-lg lg:flex-row-reverse lg:items-start">
+          <div class="overflow-hidden rounded-[28px] border border-indigo-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
+            <img src="/review.jpg" alt="Review artwork" class="h-full w-full object-cover" />
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <p class="font-mono text-caption uppercase tracking-wider text-indigo-600">Reviews</p>
+              <h2 class="text-display-sm font-semibold text-ink">Thoughtful analysis</h2>
+              <p class="text-body-sm text-body text-mute mt-sm">
+                Read in-depth opinions across anime, manga, and webtoons.<br />
+                Discover ratings and recommendations from our team.<br />
+                Find the best picks for your next watch or read.
+              </p>
+            </div>
+            <Button href="/reviews" variant="secondary" size="sm">See Reviews</Button>
+          </div>
+        </div>
+      </Card>
+
+      <Card class="p-lg border border-cyan-100 bg-[#ecfeff] shadow-[0_20px_50px_-32px_rgba(6,182,212,0.35)] w-full">
+        <div class="flex flex-col gap-lg lg:flex-row lg:items-start">
+          <div class="overflow-hidden rounded-[28px] border border-cyan-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
+            <img src="/webtoon.jpg" alt="Webtoon showcase" class="h-full w-full object-cover" />
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <p class="font-mono text-caption uppercase tracking-wider text-cyan-600">Webtoons</p>
+              <h2 class="text-display-sm font-semibold text-ink">Starter pack</h2>
+              <p class="text-body-sm text-body text-mute mt-sm">
+                Explore curated webtoon recommendations for every genre.<br />
+                Start with fan favorites and binge-worthy stories.<br />
+                A great list for new readers and longtime fans.
+              </p>
+            </div>
+            <Button href="/webtoons" variant="secondary" size="sm">Browse Webtoons</Button>
+          </div>
+        </div>
+      </Card>
+
+      <Card class="p-lg border border-rose-100 bg-[#fff1f2] shadow-[0_20px_50px_-32px_rgba(244,63,94,0.25)] w-full">
+        <div class="flex flex-col gap-lg lg:flex-row-reverse lg:items-start">
+          <div class="overflow-hidden rounded-[28px] border border-rose-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
+            <img src="/trending.jpg" alt="Trending highlights" class="h-full w-full object-cover" />
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <p class="font-mono text-caption uppercase tracking-wider text-rose-600">Trending</p>
+              <h2 class="text-display-sm font-semibold text-ink">What’s hot now</h2>
+              <p class="text-body-sm text-body text-mute mt-sm">
+                Discover current fan favorites across anime, manga, and manhwa.<br />
+                Stay on top of the latest trends and must-see titles.<br />
+                See what the community is talking about now.
+              </p>
+            </div>
+            <Button href="/trending" variant="secondary" size="sm">Check Trending</Button>
+          </div>
+        </div>
+      </Card>
     </div>
   </section>
-
 </Layout>

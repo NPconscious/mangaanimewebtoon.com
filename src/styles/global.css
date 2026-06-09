@@ -99,7 +99,22 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-canvas-soft text-ink font-sans antialiased;
+    @apply text-ink font-sans antialiased;
+    background: radial-gradient(circle at top left, rgba(123,97,255,0.12), transparent 24%),
+                radial-gradient(circle at top right, rgba(0,156,255,0.12), transparent 18%),
+                linear-gradient(180deg, #f8fbff 0%, #f9f6ff 45%, #fffaf7 100%);
+  }
+
+  a {
+    @apply text-link transition-colors duration-200;
+  }
+
+  a:hover {
+    color: var(--color-link-deep);
   }
 }
