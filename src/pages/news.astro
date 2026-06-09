@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('news');
+const latestNews = allNews
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .slice(0, 8);
+---
+
+<Layout title="News | Manga Anime Webtoon" description="Latest announcements and release date updates for anime, manga, and webtoons.">
+  <section class="w-full bg-canvas py-section px-lg">
+    <div class="max-w-[1200px] mx-auto flex flex-col gap-xl">
+      <div class="flex flex-col gap-sm">
+        <p class="font-mono text-caption uppercase tracking-wider text-mute">News</p>
+        <h1 class="text-display-lg font-semibold tracking-[-1.28px] text-ink">New anime release dates and announcements</h1>
+        <p class="text-body-lg text-body max-w-[720px]">Stay up to date with the latest release schedules, studio announcements, and upcoming anime premieres.</p>
+      </div>
+
+      <div class="space-y-lg">
+        <ul class="space-y-md">
+          <li>
+            <h3 class="text-display-sm font-semibold text-ink">Fantasy Chronicle</h3>
+            <p class="text-body-sm text-body text-mute">A sprawling fantasy epic with intricate worldbuilding and a slow-burn mystery. Premieres October 2026 with a special first-episode event.</p>
+          </li>
+          <li>
+            <h3 class="text-display-sm font-semibold text-ink">Mecha Rebirth</h3>
+            <p class="text-body-sm text-body text-mute">A reboot of a classic mecha franchise featuring modern animation and a darker tone. Release window set for Winter 2026.</p>
+          </li>
+          <li>
+            <h3 class="text-display-sm font-semibold text-ink">Slice of Summer</h3>
+            <p class="text-body-sm text-body text-mute">A heartwarming slice-of-life series about friendship and small-town summers. Debuts in July 2026 with a 12-episode run.</p>
+          </li>
+          <li>
+            <h3 class="text-display-sm font-semibold text-ink">Shadow Hunters</h3>
+            <p class="text-body-sm text-body text-mute">A supernatural action series blending horror and fast-paced combat. Scheduled for an early Fall 2026 release.</p>
+          </li>
+          <li>
+            <h3 class="text-display-sm font-semibold text-ink">Starlight Odyssey</h3>
+            <p class="text-body-sm text-body text-mute">A sci-fi adventure across distant worlds with stunning visuals and an emotional core. Targeted for late 2026 worldwide streaming.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

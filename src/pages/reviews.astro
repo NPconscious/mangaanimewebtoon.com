@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const allReviews = await getCollection('reviews');
+const latestReviews = allReviews
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .slice(0, 6);
+---
+
+<Layout title="Reviews | Manga Anime Webtoon" description="The latest anime, manga, and webtoon reviews from our editorial team.">
+  <section class="w-full bg-canvas py-section px-lg">
+    <div class="max-w-[1200px] mx-auto flex flex-col gap-xl">
+      <div class="flex flex-col gap-sm">
+        <p class="font-mono text-caption uppercase tracking-wider text-mute">Reviews</p>
+        <h1 class="text-display-lg font-semibold tracking-[-1.28px] text-ink">In-depth recommendations and critiques</h1>
+        <p class="text-body-lg text-body max-w-[720px]">Anime reviews will be here.</p>
+        <div class="text-body max-w-[720px] space-y-2">
+          <p class="font-medium">Featured anime:</p>
+          <ul class="list-disc list-inside text-body-sm text-body text-mute">
+            <li>Naruto</li>
+            <li>Demon Slayer</li>
+            <li>Jujutsu Kaisen</li>
+            <li>Attack on Titan</li>
+            <li>One Piece</li>
+          </ul>
+        </div>
+      </div>
+
+      {latestReviews.length ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+          {latestReviews.map((post) => (
+            <Card variant="marketing" class="group">
+              <div class="flex flex-col gap-md h-full">
+                <div class="flex flex-wrap gap-xs">
+                  {post.data.tags.slice(0, 2).map((tag) => (
+                    <Badge>{tag}</Badge>
+                  ))}
+                </div>
+                <h2 class="text-display-sm font-semibold tracking-[-0.6px] text-ink">{post.data.title}</h2>
+                <p class="text-body-sm text-body line-clamp-4">{post.data.description}</p>
+                <div class="mt-auto flex items-center justify-between text-caption text-mute pt-md border-t border-hairline">
+                  <span>{post.data.author}</span>
+                  <span>{new Date(post.data.pubDate).toLocaleDateString()}</span>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <p class="text-body text-mute">No reviews have been added yet. Create Markdown files in <code>src/content/reviews/</code>.</p>
+      )}
+    </div>
+  </section>
+</Layout>

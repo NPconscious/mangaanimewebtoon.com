@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Trending | Manga Anime Webtoon" description="Current trending picks across anime, webtoons, and manga.">
+  <section class="w-full bg-canvas py-section px-lg">
+    <div class="max-w-[900px] mx-auto">
+      <div class="bg-canvas-soft p-lg rounded-lg shadow-[var(--shadow-level-3)] border border-hairline">
+        <h2 class="font-mono text-caption uppercase tracking-wider text-mute mb-sm">Trending</h2>
+        <p class="text-display-sm font-semibold text-ink mb-md">Trending picks across anime, webtoons, and manga</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+          <div>
+            <h3 class="font-semibold text-ink mb-xs">Anime</h3>
+            <p class="text-body-sm text-body text-mute">One Piece — New arcs grabbing global attention.\nJujutsu Kaisen — Intense battles and rising popularity.</p>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-ink mb-xs">Webtoon</h3>
+            <p class="text-body-sm text-body text-mute">Lore of the Fallen — Dark fantasy serialization with strong fanbase.\nNeon Alley — Stylish cyber-noir gaining traction.</p>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-ink mb-xs">Manga</h3>
+            <p class="text-body-sm text-body text-mute">Attack on Titan — Continued discussion around its themes.\nSpy x Family — Lighthearted espionage still trending.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
