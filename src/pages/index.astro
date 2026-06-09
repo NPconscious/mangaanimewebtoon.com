@@ -1,11 +1,96 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allNews = await getCollection('news');
+const latestNews = allNews.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Manga Anime Webtoon">
+  
+  <!-- Hero Section -->
+  <section class="relative w-full overflow-hidden bg-canvas py-section px-lg flex flex-col items-center text-center">
+    <!-- Mesh Gradient Background (Vercel Inspired) -->
+    <div class="absolute inset-0 z-0 opacity-40 pointer-events-none overflow-hidden flex justify-center">
+      <div class="absolute top-[-10%] w-[800px] h-[400px] bg-gradient-to-r from-[var(--color-gradient-develop-start)] via-[var(--color-gradient-preview-start)] to-[var(--color-gradient-ship-start)] blur-[100px] rounded-full mix-blend-multiply"></div>
+      <div class="absolute top-[10%] w-[600px] h-[300px] bg-gradient-to-r from-[var(--color-gradient-develop-end)] via-[var(--color-gradient-preview-end)] to-[var(--color-gradient-ship-end)] blur-[80px] rounded-full mix-blend-multiply opacity-70"></div>
+    </div>
+
+    <div class="relative z-10 max-w-[800px] flex flex-col items-center gap-md">
+      <Badge class="mb-sm">✨ New Season Announcements</Badge>
+      <h1 class="text-display-xl font-semibold tracking-[-2.4px] text-ink max-w-[15ch]">
+        The heartbeat of anime and manga culture.
+      </h1>
+      <p class="text-body-lg text-body max-w-[600px]">
+        Discover the latest breaking news, deep-dive reviews, and webtoon recommendations tailored for the ultimate fan experience.
+      </p>
+      <div class="flex items-center gap-sm mt-lg">
+        <Button variant="primary" size="lg" href="/news">Start Reading</Button>
+        <Button variant="secondary" size="lg" href="/trending">Trending Now</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest News Section -->
+  <section class="w-full bg-canvas-soft py-5xl px-lg">
+    <div class="max-w-[1400px] mx-auto flex flex-col gap-xl">
+      <div class="flex flex-col gap-xs">
+        <h2 class="font-mono text-caption uppercase tracking-wider text-mute">Latest Coverage</h2>
+        <h3 class="text-display-lg font-semibold tracking-[-1.28px] text-ink">Breaking News</h3>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+        {latestNews.map((post) => (
+          <Card variant="marketing" href={`/news/${post.id}`} class="group">
+            <div class="flex flex-col gap-md h-full">
+              <div class="flex items-center gap-xs">
+                {post.data.tags.slice(0, 2).map((tag) => (
+                  <Badge>{tag}</Badge>
+                ))}
+              </div>
+              <h4 class="text-display-sm font-semibold tracking-[-0.6px] text-ink group-hover:text-link transition-colors">
+                {post.data.title}
+              </h4>
+              <p class="text-body-sm text-body line-clamp-3">
+                {post.data.description}
+              </p>
+              <div class="mt-auto flex items-center justify-between text-caption text-mute pt-md border-t border-hairline">
+                <span>{post.data.author}</span>
+                <span>{new Date(post.data.pubDate).toLocaleDateString()}</span>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Webtoons Showcase Section (Dark Polarity Flip) -->
+  <section class="w-full bg-primary py-5xl px-lg">
+    <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row gap-4xl items-center">
+      <div class="flex-1 flex flex-col gap-md">
+        <h2 class="font-mono text-caption uppercase tracking-wider text-mute">Webtoon Discovery</h2>
+        <h3 class="text-display-lg font-semibold tracking-[-1.28px] text-on-primary">
+          A new era of vertical scrolling.
+        </h3>
+        <p class="text-body-lg text-body text-[var(--color-mute)]">
+          Explore our curated lists of the most gripping webtoons hitting the digital shelves this month.
+        </p>
+        <div class="mt-md">
+          <Button variant="secondary" size="lg" href="/webtoons">Explore Webtoons</Button>
+        </div>
+      </div>
+      <div class="flex-1 w-full relative">
+        <div class="bg-canvas-soft-2 p-lg rounded-lg shadow-2xl relative overflow-hidden h-[400px] w-full flex items-center justify-center border border-[#333]">
+          <div class="font-mono text-mute text-center">
+            [ Webtoon Showcase Image Mockup ]
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </Layout>

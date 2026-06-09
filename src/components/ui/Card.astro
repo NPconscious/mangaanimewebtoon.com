@@ -1,0 +1,41 @@
+---
+interface Props {
+  variant?: 'marketing' | 'marketing-large' | 'soft' | 'template';
+  href?: string;
+  class?: string;
+}
+
+const { variant = 'marketing', href, class: className = '' } = Astro.props;
+
+let variantClasses = '';
+
+// We use inline arbitrary values for shadows mapping to our global.css vars
+switch (variant) {
+  case 'marketing':
+    variantClasses = 'bg-canvas text-ink p-lg rounded-md shadow-[var(--shadow-level-3)]';
+    break;
+  case 'marketing-large':
+    variantClasses = 'bg-canvas text-ink p-xl rounded-lg shadow-[var(--shadow-level-4)]';
+    break;
+  case 'soft':
+    variantClasses = 'bg-canvas-soft text-ink p-lg rounded-md shadow-[var(--shadow-level-1)]';
+    break;
+  case 'template':
+    variantClasses = 'bg-canvas text-ink p-md rounded-md shadow-[var(--shadow-level-2)]';
+    break;
+}
+
+const combinedClasses = `block transition-shadow duration-200 hover:shadow-[var(--shadow-level-4)] ${variantClasses} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={combinedClasses}>
+      <slot />
+    </a>
+  ) : (
+    <div class={combinedClasses}>
+      <slot />
+    </div>
+  )
+}

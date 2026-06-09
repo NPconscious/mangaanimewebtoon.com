@@ -1,0 +1,58 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'nav-signup' | 'nav-login';
+  size?: 'md' | 'lg' | 'sm';
+  class?: string;
+}
+
+const { href, variant = 'primary', size = 'lg', class: className = '' } = Astro.props;
+
+// Determine classes based on variant and size
+let variantClasses = '';
+let sizeClasses = '';
+let radiusClass = 'rounded-full'; // Default to pill
+
+switch (variant) {
+  case 'primary':
+    variantClasses = 'bg-primary text-on-primary hover:opacity-90';
+    break;
+  case 'secondary':
+    variantClasses = 'bg-canvas text-ink border border-hairline hover:bg-canvas-soft';
+    break;
+  case 'nav-signup':
+    variantClasses = 'bg-primary text-on-primary hover:opacity-90';
+    radiusClass = 'rounded-sm'; // 6px radius for nav CTAs
+    break;
+  case 'nav-login':
+    variantClasses = 'bg-canvas text-ink hover:bg-canvas-soft';
+    radiusClass = 'rounded-sm';
+    break;
+}
+
+switch (size) {
+  case 'lg':
+    sizeClasses = 'text-[16px] font-medium leading-[24px] px-sm h-[48px]';
+    break;
+  case 'md':
+    sizeClasses = 'text-[14px] font-medium leading-[20px] px-sm h-[40px]';
+    break;
+  case 'sm':
+    sizeClasses = 'text-[14px] font-medium leading-[20px] px-xs h-[28px]';
+    break;
+}
+
+const combinedClasses = `inline-flex items-center justify-center transition-colors duration-200 ${variantClasses} ${sizeClasses} ${radiusClass} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={combinedClasses}>
+      <slot />
+    </a>
+  ) : (
+    <button class={combinedClasses}>
+      <slot />
+    </button>
+  )
+}
