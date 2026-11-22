@@ -1,11 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/ui/Button.astro";
+import Card from "../components/ui/Card.astro";
 ---
 
 <Layout title="Manga Anime Webtoon">
-  
   <!-- Hero Section -->
   <section class="relative w-full overflow-hidden bg-canvas py-section px-lg flex flex-col items-center text-center">
     <!-- Mesh Gradient Background (Vercel Inspired) -->
@@ -23,7 +22,8 @@ import Card from '../components/ui/Card.astro';
         The heartbeat of anime and manga culture...
       </h1>
       <p class="text-body-lg text-body max-w-[600px]">
-        Discover the latest breaking news, deep-dive reviews, and webtoon recommendations tailored for the ultimate fan experience.
+        Discover the latest breaking news, deep-dive reviews, and web novel
+        recommendations tailored for the ultimate fan experience.
       </p>
     </div>
   </section>
@@ -34,19 +34,32 @@ import Card from '../components/ui/Card.astro';
       <Card class="p-lg border border-hairline bg-white shadow-[0_24px_48px_-28px_rgba(15,23,42,0.35)] w-full">
         <div class="flex flex-col gap-lg lg:flex-row lg:items-start">
           <div class="overflow-hidden rounded-[28px] border border-slate-200 lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img src="/latest-anouncement.jpg" alt="Latest announcement" class="h-full w-full object-cover" />
+            <img
+              src="/anime/ghost-in-the-shell.jpg"
+              alt="Latest announcement"
+              class="h-full w-full object-cover"
+            />
           </div>
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-caption uppercase tracking-wider text-indigo-500">News</p>
-              <h2 class="text-display-sm font-semibold text-ink">Latest announcements</h2>
+              <p class="font-mono text-caption uppercase tracking-wider text-indigo-500">
+                News
+              </p>
+              <h2 class="text-display-sm font-semibold text-ink">
+                Latest announcements
+              </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Stay updated with release dates, studio news, and major anime industry stories.<br />
-                Get fast summaries from the biggest announcements.<br />
+                Stay updated with release dates, studio news, and major anime
+                industry stories.
+                <br />
+                Get fast summaries from the biggest announcements.
+                <br />
                 Perfect for fans tracking new season updates.
               </p>
             </div>
-            <Button href="/news" variant="secondary" size="sm">View News</Button>
+            <Button href="/news" variant="secondary" size="sm">
+              View News
+            </Button>
           </div>
         </div>
       </Card>
@@ -54,19 +67,31 @@ import Card from '../components/ui/Card.astro';
       <Card class="p-lg border border-indigo-100 bg-[#eef2ff] shadow-[0_20px_50px_-32px_rgba(99,102,241,0.45)] w-full">
         <div class="flex flex-col gap-lg lg:flex-row-reverse lg:items-start">
           <div class="overflow-hidden rounded-[28px] border border-indigo-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img src="/review.jpg" alt="Review artwork" class="h-full w-full object-cover" />
+            <img
+              src="/anime/frieren.jpg"
+              alt="Review artwork"
+              class="h-full w-full object-cover"
+            />
           </div>
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-caption uppercase tracking-wider text-indigo-600">Reviews</p>
-              <h2 class="text-display-sm font-semibold text-ink">Thoughtful analysis</h2>
+              <p class="font-mono text-caption uppercase tracking-wider text-indigo-600">
+                Reviews
+              </p>
+              <h2 class="text-display-sm font-semibold text-ink">
+                Thoughtful analysis
+              </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Read in-depth opinions across anime, manga, and webtoons.<br />
-                Discover ratings and recommendations from our team.<br />
+                Read in-depth opinions across anime, manga, and webtoons.
+                <br />
+                Discover ratings and recommendations from our team.
+                <br />
                 Find the best picks for your next watch or read.
               </p>
             </div>
-            <Button href="/reviews" variant="secondary" size="sm">See Reviews</Button>
+            <Button href="/reviews" variant="secondary" size="sm">
+              See Reviews
+            </Button>
           </div>
         </div>
       </Card>
@@ -74,19 +99,33 @@ import Card from '../components/ui/Card.astro';
       <Card class="p-lg border border-cyan-100 bg-[#ecfeff] shadow-[0_20px_50px_-32px_rgba(6,182,212,0.35)] w-full">
         <div class="flex flex-col gap-lg lg:flex-row lg:items-start">
           <div class="overflow-hidden rounded-[28px] border border-cyan-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img src="/webtoon.jpg" alt="Webtoon showcase" class="h-full w-full object-cover" />
+            <img
+              src="/covers/lord-of-the-mysteries.jpg"
+              alt="Featured Web Novels"
+              class="h-full w-full object-cover"
+            />
           </div>
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-caption uppercase tracking-wider text-cyan-600">Webtoons</p>
-              <h2 class="text-display-sm font-semibold text-ink">Starter pack</h2>
+              <p class="font-mono text-caption uppercase tracking-wider text-cyan-600">
+                Web Novels
+              </p>
+              <h2 class="text-display-sm font-semibold text-ink">
+                Beyond the Chapters
+              </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Explore curated webtoon recommendations for every genre.<br />
-                Start with fan favorites and binge-worthy stories.<br />
-                A great list for new readers and longtime fans.
+                Explore curated web novels with intricate world-building, deep
+                characters, and unforgettable plots.
+                <br />
+                From dark fantasy and supernatural mysteries to progression
+                epics.
+                <br />
+                Stories that deserve a place on every reader's list.
               </p>
             </div>
-            <Button href="/webtoons" variant="secondary" size="sm">Browse Webtoons</Button>
+            <Button href="/webnovels" variant="secondary" size="sm">
+              Browse Web Novels
+            </Button>
           </div>
         </div>
       </Card>
@@ -94,19 +133,31 @@ import Card from '../components/ui/Card.astro';
       <Card class="p-lg border border-rose-100 bg-[#fff1f2] shadow-[0_20px_50px_-32px_rgba(244,63,94,0.25)] w-full">
         <div class="flex flex-col gap-lg lg:flex-row-reverse lg:items-start">
           <div class="overflow-hidden rounded-[28px] border border-rose-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img src="/trending.jpg" alt="Trending highlights" class="h-full w-full object-cover" />
+            <img
+              src="/trending.jpg"
+              alt="Trending highlights"
+              class="h-full w-full object-cover"
+            />
           </div>
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-caption uppercase tracking-wider text-rose-600">Trending</p>
-              <h2 class="text-display-sm font-semibold text-ink">What’s hot now</h2>
+              <p class="font-mono text-caption uppercase tracking-wider text-rose-600">
+                Trending
+              </p>
+              <h2 class="text-display-sm font-semibold text-ink">
+                What’s hot now
+              </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Discover current fan favorites across anime, manga, and manhwa.<br />
-                Stay on top of the latest trends and must-see titles.<br />
+                Discover current fan favorites across anime, manga, and manhwa.
+                <br />
+                Stay on top of the latest trends and must-see titles.
+                <br />
                 See what the community is talking about now.
               </p>
             </div>
-            <Button href="/trending" variant="secondary" size="sm">Check Trending</Button>
+            <Button href="/trending" variant="secondary" size="sm">
+              Check Trending
+            </Button>
           </div>
         </div>
       </Card>

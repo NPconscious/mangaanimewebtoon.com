@@ -22,8 +22,8 @@ const reviews = defineCollection({
   schema: blogSchema,
 });
 
-const webtoons = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/webtoons" }),
+const webnovels = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/webnovels" }),
   schema: blogSchema,
 });
 
@@ -32,4 +32,4 @@ const trending = defineCollection({
   schema: blogSchema,
 });
 
-export const collections = { news, reviews, webtoons, trending };
+export const collections = { news, reviews, webnovels, trending };

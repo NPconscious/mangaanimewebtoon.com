@@ -1,51 +1,382 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Badge from '../components/ui/Badge.astro';
+
+interface TrendingEntry {
+  rank: number;
+  title: string;
+  category: 'Anime' | 'Manga' | 'Manhwa & Fiction';
+  movement: '🔥 Trending #1' | '⚡ Peak Arc' | '★ Fan Favorite' | '▲ Surging' | '● Consistent';
+  genres: string[];
+  whyTrending: string;
+  image: string;
+}
+
+const topPicks: TrendingEntry[] = [
+  {
+    rank: 1,
+    title: 'Solo Leveling (Season 2 Arise from the Shadow)',
+    category: 'Anime',
+    movement: '🔥 Trending #1',
+    genres: ['Action', 'Fantasy', 'Dungeon'],
+    whyTrending: 'Explosive sakuga animation, relentless battle choreography, and Jinwoo’s monarch awakening continue to break international streaming records.',
+    image: '/trending.jpg',
+  },
+  {
+    rank: 2,
+    title: "Omniscient Reader's Viewpoint",
+    category: 'Manhwa & Fiction',
+    movement: '★ Fan Favorite',
+    genres: ['Apocalypse', 'Psychological', 'Fantasy'],
+    whyTrending: 'Major anime adaptation announcements and high-tension manhwa scenario arcs have reignited global discussions around Sing Shong’s masterpiece.',
+    image: '/covers/omniscient-readers-viewpoint.jpg',
+  },
+  {
+    rank: 3,
+    title: 'Kagurabachi',
+    category: 'Manga',
+    movement: '▲ Surging',
+    genres: ['Sorcery', 'Katana Action', 'Shonen Jump'],
+    whyTrending: 'Chihiro’s cinematic sword duels and the Rakuzaichi auction arc have propelled Hokazono’s manga to the absolute summit of international Jump rankings.',
+    image: '/anime/kagurabachi.jpg',
+  },
+  {
+    rank: 4,
+    title: 'Dandadan',
+    category: 'Anime',
+    movement: '⚡ Peak Arc',
+    genres: ['Supernatural', 'Sci-Fi', 'Rom-Com'],
+    whyTrending: 'Science SARU’s kinetic direction and infectious Turbo Granny energy make it one of the most clipped and shared shows of the broadcast calendar.',
+    image: '/anime/dandadan.jpg',
+  },
+  {
+    rank: 5,
+    title: 'One Piece (Egghead Climax)',
+    category: 'Manga',
+    movement: '● Consistent',
+    genres: ['Adventure', 'Epic Fantasy', 'Lore'],
+    whyTrending: 'Eiichiro Oda’s lore-shattering world broadcasts and Vegapunk revelations have delivered months of non-stop community theorycrafting.',
+    image: '/covers/the-legendary-mechanic.jpg',
+  },
+  {
+    rank: 6,
+    title: 'The Beginning After the End',
+    category: 'Manhwa & Fiction',
+    movement: '★ Fan Favorite',
+    genres: ['Progression Fantasy', 'Magic', 'War'],
+    whyTrending: 'Arthur Leywin’s return to the continental war and stunning visual updates keep TBATE firmly anchored as a cornerstone of modern web fiction.',
+    image: '/covers/mother-of-learning.jpg',
+  },
+];
+
+const categoryRankings = {
+  anime: [
+    { rank: 1, title: 'Solo Leveling', status: 'Peak Streaming', genre: 'Action / Fantasy' },
+    { rank: 2, title: 'Dandadan', status: 'Viral Sensation', genre: 'Sci-Fi / Yokai' },
+    { rank: 3, title: "Frieren: Beyond Journey's End", status: 'Critical Acclaim', genre: 'Fantasy / Drama' },
+    { rank: 4, title: 'Kaiju No. 8', status: 'High Engagement', genre: 'Military / Action' },
+    { rank: 5, title: 'The Apothecary Diaries', status: 'Mystery Hit', genre: 'Historical / Court' },
+    { rank: 6, title: 'Blue Lock', status: 'Sports Phenomenon', genre: 'Soccer / Thriller' },
+  ],
+  manhwa: [
+    { rank: 1, title: "Omniscient Reader's Viewpoint", status: 'Uncontested #1', genre: 'Apocalyptic Meta' },
+    { rank: 2, title: 'The Beginning After the End', status: 'High Volume', genre: 'Progression Epic' },
+    { rank: 3, title: 'Nano Machine', status: 'Cultivation Hit', genre: 'Murim / Sci-Fi' },
+    { rank: 4, title: 'Return of the Mount Hua Sect', status: 'Comedy / Swordsmanship', genre: 'Murim Rebirth' },
+    { rank: 5, title: 'Pick Me Up, Infinite Gacha', status: 'Tactical Survival', genre: 'Game System' },
+    { rank: 6, title: "Academy's Genius Swordmaster", status: 'Rising Fast', genre: 'Fantasy Academy' },
+  ],
+  manga: [
+    { rank: 1, title: 'One Piece', status: 'Global Leader', genre: 'Epic Adventure' },
+    { rank: 2, title: 'Sakamoto Days', status: 'Peak Action', genre: 'Assassin Comedy' },
+    { rank: 3, title: 'Kagurabachi', status: 'Fastest Rising', genre: 'Modern Sorcery' },
+    { rank: 4, title: 'Chainsaw Man', status: 'Part 2 Climax', genre: 'Dark Fantasy' },
+    { rank: 5, title: 'Spy x Family', status: 'Family Favorite', genre: 'Espionage / Comedy' },
+    { rank: 6, title: 'Jujutsu Kaisen', status: 'Cultural Titan', genre: 'Dark Shonen' },
+  ],
+};
 ---
 
-<Layout title="Trending | Manga Anime Webtoon" description="Current trending picks across anime, webtoons, and manga.">
-  <section class="w-full bg-canvas py-section px-lg">
-    <div class="max-w-[900px] mx-auto">
-      <div class="bg-canvas-soft p-lg rounded-lg shadow-[var(--shadow-level-3)] border border-hairline">
-        <h2 class="font-mono text-caption uppercase tracking-wider text-mute mb-sm">Trending</h2>
-        <p class="text-display-sm font-semibold text-ink mb-md">Trending picks across anime, webtoons, and manga</p>
+<Layout 
+  title="Trending Rankings & Community Charts | Manga Anime Webtoon" 
+  description="Real-time popularity rankings and cultural pulse across anime series, manga chapters, and webtoon releases."
+>
+  <!-- Hero Section with Literary Editorial Tone -->
+  <section class="relative w-full overflow-hidden bg-canvas pt-16 pb-12 md:pt-24 md:pb-16 px-lg border-b border-hairline">
+    <!-- Subtle Ambient Glow -->
+    <div class="absolute inset-0 z-0 opacity-30 pointer-events-none overflow-hidden flex justify-center">
+      <div class="absolute -top-24 w-[720px] h-[360px] bg-gradient-to-r from-rose-200 via-pink-200 to-amber-100 blur-[110px] rounded-full"></div>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
-          <div>
-            <h3 class="font-semibold text-ink mb-xs">Anime</h3>
-            <ol class="list-decimal list-inside text-body-sm text-body text-mute space-y-2">
-              <li>Solo Leveling</li>
-              <li>Dandadan</li>
-              <li>Frieren: Beyond Journey's End</li>
-              <li>Kaiju No. 8</li>
-              <li>The Apothecary Diaries</li>
-              <li>Blue Lock</li>
-            </ol>
-          </div>
+    <div class="relative z-10 max-w-[1280px] mx-auto flex flex-col gap-md">
+      <!-- Section Tag / Eyebrow -->
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-caption font-mono uppercase tracking-widest text-ink">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+          Cultural Pulse
+        </span>
+        <span class="text-caption font-mono text-mute tracking-wider hidden sm:inline">Weekly Popularity Indices</span>
+      </div>
 
-          <div>
-            <h3 class="font-semibold text-ink mb-xs">Manhwa</h3>
-            <ol class="list-decimal list-inside text-body-sm text-body text-mute space-y-2">
-              <li>Omniscient Reader's Viewpoint</li>
-              <li>The Beginning After the End</li>
-              <li>Nano Machine</li>
-              <li>Return of the Mount Hua Sect</li>
-              <li>Pick Me Up, Infinite Gacha</li>
-              <li>Academy's Genius Swordmaster</li>
-            </ol>
-          </div>
+      <!-- Main Headline -->
+      <div class="flex flex-col gap-3">
+        <h1 class="text-display-lg md:text-display-xl font-semibold tracking-[-1.5px] md:tracking-[-2px] text-ink max-w-[20ch]">
+          The Community Pulse
+        </h1>
+        <p class="text-display-sm font-normal text-body text-slate-600 tracking-tight max-w-[32ch]">
+          What the community is reading, streaming, and passionately debating right now.
+        </p>
+      </div>
 
-          <div>
-            <h3 class="font-semibold text-ink mb-xs">Manga</h3>
-            <ol class="list-decimal list-inside text-body-sm text-body text-mute space-y-2">
-              <li>One Piece</li>
-              <li>Sakamoto Days</li>
-              <li>Kagurabachi</li>
-              <li>Chainsaw Man</li>
-              <li>Spy x Family</li>
-              <li>Jujutsu Kaisen</li>
-            </ol>
-          </div>
+      <!-- Editorial Intro Copy -->
+      <div class="mt-2 max-w-[820px] flex flex-col gap-3 text-body-md md:text-body-lg text-body text-slate-700 leading-relaxed">
+        <p>
+          Trends reflect collective enthusiasm. Our trending rankings synthesize streaming statistics, community readership indices, chapter release spikes, and critical discourse across anime, manga, and serialized web fiction.
+        </p>
+        <p class="text-slate-600 text-body-md">
+          Discover the breakthrough arcs, viral sensations, and enduring powerhouses dominating fandom this week.
+        </p>
+      </div>
+
+      <!-- Editorial Motto Pill -->
+      <div class="mt-4 pt-4 border-t border-hairline flex flex-wrap items-center gap-3">
+        <span class="font-mono text-caption uppercase tracking-widest text-mute">Ranking Metrics</span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-canvas-soft border border-hairline text-body-sm font-medium text-ink">
+          <span>Streaming Velocity.</span>
+          <span class="text-mute">·</span>
+          <span>Reader Engagement.</span>
+          <span class="text-mute">·</span>
+          <span class="text-rose-600">Cross-Platform Buzz.</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main 3-Column Top Picks Showcase Grid -->
+  <section class="w-full bg-canvas py-12 md:py-16 px-lg">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-10">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-4">
+        <div>
+          <h2 class="text-display-sm md:text-display-md font-semibold text-ink tracking-tight">
+            Top Global Trending Standouts
+          </h2>
+          <p class="text-body-sm text-mute mt-1">
+            The six highest-velocity titles across international fandoms this week.
+          </p>
+        </div>
+        <div class="text-caption font-mono text-mute">
+          Updated Weekly
+        </div>
+      </div>
+
+      <!-- 3-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {topPicks.map((item) => (
+          <article 
+            class="group flex flex-col bg-white rounded-2xl border border-hairline hover:border-slate-300 transition-all duration-300 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(15,23,42,0.12)] overflow-hidden"
+          >
+            <!-- Card Image Showcase -->
+            <div class="relative w-full overflow-hidden border-b border-hairline bg-slate-100">
+              <img 
+                src={item.image} 
+                alt={`${item.title} artwork`}
+                class="anime-card-image transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                loading="eager"
+              />
+              
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
+
+              <!-- Top Badges -->
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-mono font-medium tracking-wide uppercase bg-black/75 text-white backdrop-blur-md border border-white/20 shadow-sm">
+                  {item.category}
+                </span>
+
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide uppercase bg-rose-600 text-white shadow-md">
+                  <span>{item.movement}</span>
+                </span>
+              </div>
+
+              <!-- Bottom Rank Plaque -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                <span class="text-[13px] font-mono font-bold text-white drop-shadow-md">
+                  Rank #{item.rank}
+                </span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-black/70 text-slate-200 border border-white/10">
+                  {item.genres[0]}
+                </span>
+              </div>
+            </div>
+
+            <!-- Content & Trend Analysis -->
+            <div class="p-6 flex flex-col flex-1 justify-between gap-4">
+              <div class="flex flex-col gap-2.5">
+                <!-- Genres -->
+                <div class="flex items-center flex-wrap gap-1.5 text-caption font-medium text-rose-600">
+                  {item.genres.map((genre, gIdx) => (
+                    <span class="inline-flex items-center">
+                      <span>{genre}</span>
+                      {gIdx < item.genres.length - 1 && (
+                        <span class="text-slate-300 mx-1.5 font-normal">·</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+
+                <!-- Title -->
+                <div>
+                  <h3 class="text-display-sm font-semibold text-ink group-hover:text-rose-600 transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <!-- Reason for Trending -->
+                <p class="text-body-sm text-body text-slate-600 leading-relaxed mt-1">
+                  {item.whyTrending}
+                </p>
+              </div>
+
+              <!-- Footer -->
+              <div class="pt-4 border-t border-hairline mt-auto flex items-center justify-between text-[11px] font-mono text-mute">
+                <span class="uppercase tracking-wider">Velocity</span>
+                <span class="text-rose-700 font-semibold">{item.movement}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Pillar Category Charts -->
+  <section class="w-full bg-canvas-soft py-16 px-lg border-t border-hairline">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-10">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-4">
+        <div>
+          <span class="font-mono text-caption uppercase tracking-wider text-rose-600 font-medium">Category Breakdown</span>
+          <h2 class="text-display-md font-semibold text-ink tracking-tight mt-1">
+            Top 6 Across Each Medium
+          </h2>
+          <p class="text-body-sm text-body text-mute max-w-[680px] mt-1">
+            A comprehensive side-by-side leaderboard charting streaming series, serialized manhwa, and ongoing manga chapters.
+          </p>
+        </div>
+        <span class="text-caption font-mono text-mute hidden sm:inline">Official Rankings</span>
+      </div>
+
+      <!-- 3 Columns for Anime, Manhwa, Manga -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Anime Column -->
+        <div class="bg-white rounded-2xl border border-hairline p-6 shadow-xs flex flex-col gap-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+              <h3 class="text-[18px] font-semibold text-ink">Trending Anime</h3>
+            </div>
+            <span class="text-[11px] font-mono uppercase text-mute tracking-wider">Broadcast</span>
+          </div>
+
+          <ol class="space-y-3">
+            {categoryRankings.anime.map((entry) => (
+              <li class="flex items-start justify-between gap-3 p-3 rounded-xl bg-slate-50/70 hover:bg-slate-100/80 transition-colors border border-slate-200/50">
+                <div class="flex items-start gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white border border-slate-200 flex items-center justify-center font-mono text-[12px] font-bold text-slate-700">
+                    {entry.rank}
+                  </span>
+                  <div>
+                    <h4 class="text-body-sm font-semibold text-ink leading-tight">
+                      {entry.title}
+                    </h4>
+                    <p class="text-[11px] text-mute mt-0.5">{entry.genre}</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100/70 shrink-0">
+                  {entry.status}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <!-- Manhwa & Fiction Column -->
+        <div class="bg-white rounded-2xl border border-hairline p-6 shadow-xs flex flex-col gap-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+              <h3 class="text-[18px] font-semibold text-ink">Trending Manhwa & Fiction</h3>
+            </div>
+            <span class="text-[11px] font-mono uppercase text-mute tracking-wider">Web Serials</span>
+          </div>
+
+          <ol class="space-y-3">
+            {categoryRankings.manhwa.map((entry) => (
+              <li class="flex items-start justify-between gap-3 p-3 rounded-xl bg-slate-50/70 hover:bg-slate-100/80 transition-colors border border-slate-200/50">
+                <div class="flex items-start gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white border border-slate-200 flex items-center justify-center font-mono text-[12px] font-bold text-slate-700">
+                    {entry.rank}
+                  </span>
+                  <div>
+                    <h4 class="text-body-sm font-semibold text-ink leading-tight">
+                      {entry.title}
+                    </h4>
+                    <p class="text-[11px] text-mute mt-0.5">{entry.genre}</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-50 text-cyan-800 border border-cyan-100/70 shrink-0">
+                  {entry.status}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <!-- Manga Column -->
+        <div class="bg-white rounded-2xl border border-hairline p-6 shadow-xs flex flex-col gap-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+              <h3 class="text-[18px] font-semibold text-ink">Trending Manga</h3>
+            </div>
+            <span class="text-[11px] font-mono uppercase text-mute tracking-wider">Chapters</span>
+          </div>
+
+          <ol class="space-y-3">
+            {categoryRankings.manga.map((entry) => (
+              <li class="flex items-start justify-between gap-3 p-3 rounded-xl bg-slate-50/70 hover:bg-slate-100/80 transition-colors border border-slate-200/50">
+                <div class="flex items-start gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white border border-slate-200 flex items-center justify-center font-mono text-[12px] font-bold text-slate-700">
+                    {entry.rank}
+                  </span>
+                  <div>
+                    <h4 class="text-body-sm font-semibold text-ink leading-tight">
+                      {entry.title}
+                    </h4>
+                    <p class="text-[11px] text-mute mt-0.5">{entry.genre}</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-100/70 shrink-0">
+                  {entry.status}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <!-- Community Voting Callout -->
+      <div class="p-6 rounded-2xl border border-dashed border-slate-300 bg-white/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h4 class="text-body-md font-semibold text-ink">Want to vote for next week's trending leaderboard?</h4>
+          <p class="text-body-sm text-mute mt-0.5">
+            Share your favorite ongoing arcs, sudden plot twists, or underrated hidden gems.
+          </p>
+        </div>
+        <a 
+          href="mailto:admin@mangaanimewebtoon.com?subject=Trending%20Chart%20Vote" 
+          class="shrink-0 px-4 py-2 rounded-full bg-ink text-white hover:bg-slate-800 text-body-sm font-medium transition-colors"
+        >
+          Submit Community Vote
+        </a>
       </div>
     </div>
   </section>

@@ -1,0 +1,377 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Badge from '../components/ui/Badge.astro';
+
+interface WebNovel {
+  id: string;
+  title: string;
+  author: string;
+  origin: string;
+  genres: string[];
+  description: string;
+  coverImage: string;
+  featuredBadge?: string;
+  highlights?: string[];
+}
+
+const featuredNovels: WebNovel[] = [
+  {
+    id: 'lord-of-the-mysteries',
+    title: 'Lord of the Mysteries',
+    author: 'Cuttlefish That Loves Diving',
+    origin: 'Chinese Web Novel',
+    genres: ['Fantasy', 'Mystery', 'Supernatural'],
+    description: 'A man awakens in a mysterious Victorian-inspired world filled with secret societies, ancient powers and forbidden knowledge.',
+    coverImage: '/covers/lord-of-the-mysteries.jpg',
+    featuredBadge: 'Must Feature',
+    highlights: ['Victorian Steampunk', 'Eldritch Lore', 'Complex Magic System'],
+  },
+  {
+    id: 'shadow-slave',
+    title: 'Shadow Slave',
+    author: 'Guiltythree',
+    origin: 'Western Web Serial',
+    genres: ['Dark Fantasy', 'Action', 'Adventure'],
+    description: 'In a world consumed by nightmares, survival means confronting terrifying creatures and uncovering the secrets of a broken world.',
+    coverImage: '/covers/shadow-slave.jpg',
+    highlights: ['Nightmarish Spell', 'Cunning Anti-Hero', 'Atmospheric Dread'],
+  },
+  {
+    id: 'mother-of-learning',
+    title: 'Mother of Learning',
+    author: 'nobody103',
+    origin: 'Western Web Serial',
+    genres: ['Fantasy', 'Magic', 'Time Loop'],
+    description: 'A young mage finds himself trapped in a repeating month, forced to uncover the mystery behind the time loop.',
+    coverImage: '/covers/mother-of-learning.jpg',
+    highlights: ['Hard Magic', 'Methodical Mastery', 'Layered Mystery'],
+  },
+  {
+    id: 'reverend-insanity',
+    title: 'Reverend Insanity',
+    author: 'Gu Zhen Ren',
+    origin: 'Chinese Web Novel',
+    genres: ['Dark Fantasy', 'Strategy', 'Cultivation'],
+    description: 'A ruthless protagonist travels through a world governed by supernatural Gu abilities, ambition and brutal competition.',
+    coverImage: '/covers/reverend-insanity.jpg',
+    highlights: ['Ruthless Realism', 'Gu System', 'Philosophical Schemes'],
+  },
+  {
+    id: 'the-perfect-run',
+    title: 'The Perfect Run',
+    author: 'Maxime J. Durand',
+    origin: 'Western Web Serial',
+    genres: ['Sci-Fi', 'Comedy', 'Time Loop'],
+    description: 'A man with the ability to reset time attempts to find the perfect outcome in a chaotic superpowered world.',
+    coverImage: '/covers/the-perfect-run.jpg',
+    highlights: ['Deadpan Humor', 'Superpower Dystopia', 'Emotional Depth'],
+  },
+  {
+    id: 'the-legendary-mechanic',
+    title: 'The Legendary Mechanic',
+    author: 'Chocolion',
+    origin: 'Chinese Web Novel',
+    genres: ['Sci-Fi', 'Action', 'Game System'],
+    description: 'A player finds himself inside the game world as an NPC and uses his knowledge of the future to build his own empire.',
+    coverImage: '/covers/the-legendary-mechanic.jpg',
+    highlights: ['NPC Progression', 'Galactic Warfare', 'Empire Building'],
+  },
+  {
+    id: 'the-primal-hunter',
+    title: 'The Primal Hunter',
+    author: 'Zogarth',
+    origin: 'Western Web Serial',
+    genres: ['Progression Fantasy', 'Action', 'Adventure'],
+    description: 'An ordinary office worker is thrown into a deadly tutorial where survival and evolution become everything.',
+    coverImage: '/covers/the-primal-hunter.jpg',
+    highlights: ['Instinctual Combat', 'Bloodline Awakening', 'Solo Survival'],
+  },
+  {
+    id: 'omniscient-readers-viewpoint',
+    title: "Omniscient Reader's Viewpoint",
+    author: 'singNsong',
+    origin: 'Korean Web Novel',
+    genres: ['Fantasy', 'Apocalypse', 'Psychological'],
+    description: 'The only reader of an obscure web novel discovers that its fictional world has become reality, and he alone knows how the story unfolds.',
+    coverImage: '/covers/omniscient-readers-viewpoint.jpg',
+    highlights: ['Meta-Fiction Masterpiece', 'Constellations', 'Psychological Drama'],
+  },
+];
+
+const upcomingNovels = [
+  {
+    title: 'The Beginning After the End',
+    author: 'TurtleMe',
+    origin: 'Western Web Serial',
+    genres: ['Progression Fantasy', 'Reincarnation'],
+    teaser: 'A former monarch awakens into a world of magic and monsters, seeking purpose beyond a lifetime of isolation and regret.',
+    status: 'Editorial In Review',
+  },
+  {
+    title: "A Regressor's Tale of Cultivation",
+    author: 'Dorae',
+    origin: 'Korean Web Novel',
+    genres: ['Cultivation', 'Time Loop', 'Philosophy'],
+    teaser: 'Without peerless talent or miraculous cheats, an ordinary cultivator relives lifetimes striving for enlightenment and sincere human connection.',
+    status: 'Upcoming Feature',
+  },
+  {
+    title: 'The Second Coming of Gluttony',
+    author: 'Ro Yu-jin',
+    origin: 'Korean Web Novel',
+    genres: ['Dark Fantasy', 'Redemption', 'Psychological'],
+    teaser: 'Haunted by past failures and guided by fleeting emotional echoes, a young man enters the brutal realm of Paradise for one last shot at redemption.',
+    status: 'Upcoming Feature',
+  },
+  {
+    title: 'SSS-Class Suicide Hunter',
+    author: 'Shin Noah',
+    origin: 'Korean Web Novel',
+    genres: ['Tower Climb', 'Psychological', 'Drama'],
+    teaser: 'A deeply moving exploration of empathy and human tragedy disguised as a tower-climbing regression adventure.',
+    status: 'Editorial In Review',
+  },
+  {
+    title: 'Deep Sea Embers',
+    author: 'Cuttlefish That Loves Diving',
+    origin: 'Chinese Web Novel',
+    genres: ['Lovecraftian', 'Mystery', 'Steampunk'],
+    teaser: 'Ghost ships, eldritch anomalies, and forgotten deities across a fog-shrouded archipelago where nothing is as it seems.',
+    status: 'Upcoming Feature',
+  },
+  {
+    title: 'Chrysalis',
+    author: 'RinoZ',
+    origin: 'Western Web Serial',
+    genres: ['Progression Fantasy', 'Monster Evolution', 'Comedy'],
+    teaser: 'Reborn as an ant in a monstrous underground abyss, one devoted colony defender climbs the evolutionary ladder through sheer grit and family devotion.',
+    status: 'Under Evaluation',
+  },
+];
+---
+
+<Layout 
+  title="Beyond the Chapters — Featured Web Novels | Manga Anime Webtoon" 
+  description="Discover exceptional web novels from across the world. Deep world-building, intricate character development, and unforgettable storytelling."
+>
+  <!-- Hero Section with Literary Editorial Tone -->
+  <section class="relative w-full overflow-hidden bg-canvas pt-16 pb-12 md:pt-24 md:pb-16 px-lg border-b border-hairline">
+    <!-- Subtle Ambient Glow -->
+    <div class="absolute inset-0 z-0 opacity-30 pointer-events-none overflow-hidden flex justify-center">
+      <div class="absolute -top-24 w-[720px] h-[360px] bg-gradient-to-r from-indigo-200 via-sky-200 to-amber-100 blur-[110px] rounded-full"></div>
+    </div>
+
+    <div class="relative z-10 max-w-[1280px] mx-auto flex flex-col gap-md">
+      <!-- Section Tag / Eyebrow -->
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-caption font-mono uppercase tracking-widest text-ink">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+          Web Novels
+        </span>
+        <span class="text-caption font-mono text-mute tracking-wider hidden sm:inline">Literary Collection</span>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="flex flex-col gap-3">
+        <h1 class="text-display-lg md:text-display-xl font-semibold tracking-[-1.5px] md:tracking-[-2px] text-ink max-w-[20ch]">
+          Beyond the Chapters
+        </h1>
+        <p class="text-display-sm font-normal text-body text-slate-600 tracking-tight max-w-[32ch]">
+          Stories Beyond the Pages
+        </p>
+      </div>
+
+      <!-- Editorial Intro Copy -->
+      <div class="mt-2 max-w-[820px] flex flex-col gap-3 text-body-md md:text-body-lg text-body text-slate-700 leading-relaxed">
+        <p>
+          Some stories are too big to be confined to a screen. Explore a collection of remarkable web novels filled with extraordinary worlds, unforgettable characters, intricate plots and limitless imagination.
+        </p>
+        <p class="text-slate-600 text-body-md">
+          From dark fantasy and supernatural mysteries to progression adventures and psychological thrillers, discover your next favourite story.
+        </p>
+      </div>
+
+      <!-- Editorial Motto Pill -->
+      <div class="mt-4 pt-4 border-t border-hairline flex flex-wrap items-center gap-3">
+        <span class="font-mono text-caption uppercase tracking-widest text-mute">Core Philosophy</span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-canvas-soft border border-hairline text-body-sm font-medium text-ink">
+          <span>Explore.</span>
+          <span class="text-mute">·</span>
+          <span>Read.</span>
+          <span class="text-mute">·</span>
+          <span class="text-indigo-600">Get Lost in the Story.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main 3-Column Cover-Art Grid -->
+  <section class="w-full bg-canvas py-12 md:py-16 px-lg">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-10">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-4">
+        <div>
+          <h2 class="text-display-sm md:text-display-md font-semibold text-ink tracking-tight">
+            Featured Web Novels
+          </h2>
+          <p class="text-body-sm text-mute mt-1">
+            Curated mix of celebrated Chinese, Korean, and Western web fiction chosen for literary craft and storytelling.
+          </p>
+        </div>
+        <div class="text-caption font-mono text-mute">
+          8 Masterpieces Selected
+        </div>
+      </div>
+
+      <!-- 3-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredNovels.map((novel, index) => (
+          <article 
+            class="group flex flex-col bg-white rounded-2xl border border-hairline hover:border-slate-300 transition-all duration-300 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(15,23,42,0.12)] overflow-hidden"
+          >
+            <!-- Book Cover Showcase -->
+            <div class="relative w-full aspect-[2/3] bg-slate-100 overflow-hidden border-b border-hairline">
+              <img 
+                src={novel.coverImage} 
+                alt={`${novel.title} book cover`}
+                class="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                loading={index < 3 ? 'eager' : 'lazy'}
+              />
+              
+              <!-- Subtle vignette overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+
+              <!-- Top Badges -->
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-mono font-medium tracking-wide uppercase bg-black/75 text-white backdrop-blur-md border border-white/20 shadow-sm">
+                  {novel.origin}
+                </span>
+
+                {novel.featuredBadge && (
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide uppercase bg-amber-500 text-black shadow-md">
+                    <span>★</span>
+                    <span>{novel.featuredBadge}</span>
+                  </span>
+                )}
+              </div>
+
+              <!-- Bottom Cover Title Plaque (for fast visual identity) -->
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <span class="text-[12px] font-mono text-white/90 drop-shadow-md">
+                  #{String(index + 1).padStart(2, '0')} Selection
+                </span>
+              </div>
+            </div>
+
+            <!-- Novel Details & Editorial Synopsis -->
+            <div class="p-6 flex flex-col flex-1 justify-between gap-4">
+              <div class="flex flex-col gap-2.5">
+                <!-- Genre List -->
+                <div class="flex items-center flex-wrap gap-1.5 text-caption font-medium text-indigo-600">
+                  {novel.genres.map((genre, gIdx) => (
+                    <span class="inline-flex items-center">
+                      <span>{genre}</span>
+                      {gIdx < novel.genres.length - 1 && (
+                        <span class="text-slate-300 mx-1.5 font-normal">·</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+
+                <!-- Title & Author -->
+                <div>
+                  <h3 class="text-display-sm font-semibold text-ink group-hover:text-indigo-600 transition-colors leading-snug">
+                    {novel.title}
+                  </h3>
+                  <p class="text-caption font-mono text-mute mt-0.5">
+                    by {novel.author}
+                  </p>
+                </div>
+
+                <!-- Literary Synopsis -->
+                <p class="text-body-sm text-body text-slate-600 leading-relaxed mt-1">
+                  {novel.description}
+                </p>
+              </div>
+
+              <!-- Highlights / Why it's worth reading -->
+              {novel.highlights && (
+                <div class="pt-4 border-t border-hairline mt-auto">
+                  <p class="text-[11px] font-mono uppercase tracking-wider text-mute mb-1.5">Hallmarks</p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {novel.highlights.map((h) => (
+                      <span class="text-[11px] px-2 py-0.5 rounded bg-slate-50 border border-slate-200/70 text-slate-600">
+                        {h}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Novels & On Our Radar Section -->
+  <section class="w-full bg-canvas-soft py-16 px-lg border-t border-hairline">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="font-mono text-caption uppercase tracking-wider text-indigo-600 font-medium">On Our Radar</span>
+          <h2 class="text-display-md font-semibold text-ink tracking-tight mt-1">
+            Upcoming Web Novels & Reader Suggestions
+          </h2>
+          <p class="text-body-sm text-body text-mute max-w-[680px] mt-1">
+            Titles currently being evaluated by our editorial desk for comprehensive features, reading guides, and literary essays.
+          </p>
+        </div>
+        <span class="text-caption font-mono text-mute hidden sm:inline">6 Works Queued</span>
+      </div>
+
+      <!-- Upcoming Novels 2x3 or 3x2 Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {upcomingNovels.map((item) => (
+          <div class="bg-white p-5 rounded-xl border border-hairline hover:border-slate-300 transition-colors flex flex-col justify-between gap-3 shadow-xs">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-mono uppercase text-mute tracking-wider">{item.origin}</span>
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 font-medium">
+                  {item.status}
+                </span>
+              </div>
+              <h4 class="text-[17px] font-semibold text-ink leading-snug">
+                {item.title}
+              </h4>
+              <p class="text-[12px] font-mono text-slate-500">
+                by {item.author}
+              </p>
+              <div class="flex flex-wrap gap-1 text-[11px] text-indigo-600 font-medium">
+                {item.genres.join(' · ')}
+              </div>
+              <p class="text-body-sm text-slate-600 leading-relaxed mt-1">
+                {item.teaser}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Suggest a Novel Callout Box -->
+      <div class="mt-4 p-6 rounded-2xl border border-dashed border-slate-300 bg-white/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h4 class="text-body-md font-semibold text-ink">Have a web novel worth featuring?</h4>
+          <p class="text-body-sm text-mute mt-0.5">
+            We actively seek stories with standout world-building, exceptional writing, and original magic or progression systems.
+          </p>
+        </div>
+        <a 
+          href="mailto:admin@mangaanimewebtoon.com?subject=Web%20Novel%20Recommendation" 
+          class="shrink-0 px-4 py-2 rounded-full bg-ink text-white hover:bg-slate-800 text-body-sm font-medium transition-colors"
+        >
+          Submit a Recommendation
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

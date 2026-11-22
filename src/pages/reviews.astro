@@ -1,57 +1,391 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/ui/Card.astro';
 import Badge from '../components/ui/Badge.astro';
-import { getCollection } from 'astro:content';
 
-const allReviews = await getCollection('reviews');
-const latestReviews = allReviews
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
-  .slice(0, 6);
+interface ReviewItem {
+  id: string;
+  title: string;
+  quote: string;
+  score: string;
+  badge?: string;
+  category: 'Anime' | 'Manga' | 'Classic';
+  genres: string[];
+  review: string;
+  image: string;
+  hallmarks: string[];
+  author: string;
+}
+
+const featuredReviews: ReviewItem[] = [
+  {
+    id: 'frieren',
+    title: "Frieren: Beyond Journey's End",
+    quote: "A fantasy masterpiece about time, grief, and quiet connection.",
+    score: "9.8 / 10",
+    badge: "Masterpiece",
+    category: "Anime",
+    genres: ["Fantasy", "Drama", "Slice of Life"],
+    review: "Celebrated for its mature storytelling and emotional depth. By beginning where traditional hero journeys end, Frieren turns time itself into the central conflict, meditating on mortality and human memory with breathtaking art direction.",
+    image: "/anime/frieren.jpg",
+    hallmarks: ["Poetic Pacing", "Philosophical Depth", "Evan Call Score"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'hunter-x-hunter',
+    title: "Hunter x Hunter",
+    quote: "The smartest battle shonen ever written.",
+    score: "9.7 / 10",
+    badge: "Staff Favorite",
+    category: "Anime",
+    genres: ["Action", "Adventure", "Psychological"],
+    review: "Fans praise its Nen system as one of the most balanced, nuanced, and strategic power systems in fiction. The series constantly subverts genre expectations, and the Chimera Ant arc is universally cited among the greatest story arcs in anime history.",
+    image: "/anime/hunter-x-hunter.jpg",
+    hallmarks: ["Nen Power System", "Chimera Ant Arc", "Subversive Tropes"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'fullmetal-alchemist-brotherhood',
+    title: "Fullmetal Alchemist: Brotherhood",
+    quote: "The closest thing anime has to a flawless narrative.",
+    score: "9.9 / 10",
+    badge: "Essential Classic",
+    category: "Anime",
+    genres: ["Fantasy", "Action", "Drama"],
+    review: "Universally celebrated for its impeccable pacing, intricate worldbuilding, emotional weight, and airtight resolution. It remains the gold standard recommendation for newcomers and seasoned critics alike.",
+    image: "/anime/fullmetal-alchemist-brotherhood.jpg",
+    hallmarks: ["Flawless Pacing", "Equivalent Exchange", "Ensemble Cast"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'steins-gate',
+    title: "Steins;Gate",
+    quote: "The undisputed gold standard for time-travel fiction.",
+    score: "9.6 / 10",
+    badge: "Must Watch",
+    category: "Anime",
+    genres: ["Sci-Fi", "Thriller", "Psychological"],
+    review: "Celebrated for its monumental emotional payoff, razor-sharp causality plotting, and deeply memorable cast. Its second half is frequently cited as one of the most intense, gripping stretches of storytelling in the medium.",
+    image: "/anime/steins-gate.jpg",
+    hallmarks: ["Causality Logic", "Psychological Tension", "Okabe Rintaro"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'vinland-saga',
+    title: "Vinland Saga",
+    quote: "A transformative story about learning to become a truly good person.",
+    score: "9.7 / 10",
+    badge: "Masterpiece",
+    category: "Anime",
+    genres: ["Historical", "Action", "Philosophy"],
+    review: "Praised for peerless character development and moral complexity. Thorfinn's transition between the violent prologue and the introspective Farmland Arc represents one of the boldest thematic evolutions in modern storytelling.",
+    image: "/anime/vinland-saga.jpg",
+    hallmarks: ["True Pacifism", "Character Evolution", "Historical Grit"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'code-geass',
+    title: "Code Geass: Lelouch of the Rebellion",
+    quote: "One of the greatest endings in anime history.",
+    score: "9.5 / 10",
+    badge: "Iconic Climax",
+    category: "Anime",
+    genres: ["Mecha", "Military", "Psychological"],
+    review: "Lelouch vi Britannia stands tall among fiction's most magnetic anti-heroes. Fans praise the high-stakes tactical chess matches, political intrigue, moral ambiguities, and the unforgettable Zero Requiem finale.",
+    image: "/anime/code-geass.jpg",
+    hallmarks: ["Zero Requiem", "Anti-Hero Protagonist", "Political Intrigue"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'dandadan',
+    title: "Dandadan",
+    quote: "Modern anime at its most inventive, chaotic, and exhilarating.",
+    score: "9.3 / 10",
+    badge: "Modern Phenomenon",
+    category: "Anime",
+    genres: ["Supernatural", "Comedy", "Sci-Fi"],
+    review: "A fever dream combining aliens, urban yokai legends, laugh-out-loud comedy, heartfelt teen romance, and kinetic sakuga animation into an unpredictable and joyful spectacle.",
+    image: "/anime/dandadan.jpg",
+    hallmarks: ["Science SARU Sakuga", "Yokai x Aliens", "Unrivaled Kinetic Flow"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'hyouka',
+    title: "Hyouka",
+    quote: "A Kyoto Animation masterpiece about the poetry of ordinary life.",
+    score: "9.2 / 10",
+    badge: "Aesthetic Pinnacle",
+    category: "Anime",
+    genres: ["Mystery", "Slice of Life", "School"],
+    review: "Many viewers fall in love with how it turns mundane high school curiosities into visual poetry. The subtle character psychology, delicate romantic tension, and rich animation make it an emotional standout.",
+    image: "/anime/hyouka.jpg",
+    hallmarks: ["Visual Metaphors", "Kyoto Animation Craft", "Quiet Introspection"],
+    author: "Editorial Desk",
+  },
+  {
+    id: 'hajime-no-ippo',
+    title: "Hajime no Ippo",
+    quote: "The undisputed champion of sports storytelling.",
+    score: "9.4 / 10",
+    badge: "Inspirational",
+    category: "Classic",
+    genres: ["Sports", "Comedy", "Drama"],
+    review: "Celebrated for grounded personal growth, hard-earned triumphs, and the sheer physicality of combat. Ippo's relentless work ethic and the camaraderie of the Kamogawa Gym inspire viewers decades after publication.",
+    image: "/anime/hajime-no-ippo.jpg",
+    hallmarks: ["Dempsey Roll", "Earned Progression", "Heart & Humor"],
+    author: "Editorial Desk",
+  },
+];
+
+const quickTakeArchive = [
+  {
+    title: "City Hunter",
+    quote: "The definition of cool 80s anime.",
+    summary: "Praised for its irresistible blend of slick gun action, slapstick comedy, and jazz-soaked Tokyo charm. Ryo Saeba remains an iconic protagonist.",
+    badge: "80s Classic",
+    score: "8.8 / 10",
+  },
+  {
+    title: "Baki",
+    quote: "Pure muscular insanity in the best possible way.",
+    summary: "Embraces unfiltered martial-arts absurdity with confidence. Anatomical exaggeration, brutal showdowns, and larger-than-life brawlers make it endlessly entertaining.",
+    badge: "Cult Hit",
+    score: "8.6 / 10",
+  },
+  {
+    title: "Monster",
+    quote: "Naoki Urasawa's magnum opus on human morality.",
+    summary: "A chilling psychological cat-and-mouse thriller set across post-Cold War Germany that examines the roots of evil with uncompromising realism.",
+    badge: "Psychological Titan",
+    score: "9.8 / 10",
+  },
+];
 ---
 
-<Layout title="Reviews | Manga Anime Webtoon" description="The latest anime, manga, and webtoon reviews from our editorial team.">
-  <section class="w-full bg-canvas py-section px-lg">
-    <div class="max-w-[1200px] mx-auto flex flex-col gap-xl">
-      <div class="flex flex-col gap-sm">
-        <p class="font-mono text-caption uppercase tracking-wider text-mute">Reviews</p>
-        <h1 class="text-display-lg font-semibold tracking-[-1.28px] text-ink">In-depth recommendations and critiques</h1>
-        <p class="text-body-lg text-body max-w-[720px]">Anime reviews will be here.</p>
-        <div class="text-body max-w-[720px] space-y-2">
-          <p class="font-medium">Featured anime:</p>
-          <ul class="list-disc list-inside text-body-sm text-body text-mute">
-            <li>Naruto</li>
-            <li>Demon Slayer</li>
-            <li>Jujutsu Kaisen</li>
-            <li>Attack on Titan</li>
-            <li>One Piece</li>
-          </ul>
+<Layout 
+  title="Reviews & Critiques | Manga Anime Webtoon" 
+  description="Thoughtful, in-depth reviews and critical essays examining the finest stories in anime, manga, and beyond."
+>
+  <!-- Hero Section with Literary Editorial Tone -->
+  <section class="relative w-full overflow-hidden bg-canvas pt-16 pb-12 md:pt-24 md:pb-16 px-lg border-b border-hairline">
+    <!-- Subtle Ambient Glow -->
+    <div class="absolute inset-0 z-0 opacity-30 pointer-events-none overflow-hidden flex justify-center">
+      <div class="absolute -top-24 w-[720px] h-[360px] bg-gradient-to-r from-violet-200 via-fuchsia-200 to-amber-100 blur-[110px] rounded-full"></div>
+    </div>
+
+    <div class="relative z-10 max-w-[1280px] mx-auto flex flex-col gap-md">
+      <!-- Section Tag / Eyebrow -->
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-caption font-mono uppercase tracking-widest text-ink">
+          <span class="w-1.5 h-1.5 rounded-full bg-violet-600"></span>
+          Reviews & Critiques
+        </span>
+        <span class="text-caption font-mono text-mute tracking-wider hidden sm:inline">The Critical Lens</span>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="flex flex-col gap-3">
+        <h1 class="text-display-lg md:text-display-xl font-semibold tracking-[-1.5px] md:tracking-[-2px] text-ink max-w-[20ch]">
+          Stories Under the Lens
+        </h1>
+        <p class="text-display-sm font-normal text-body text-slate-600 tracking-tight max-w-[32ch]">
+          Thoughtful recommendations, narrative critiques, and retrospective deep-dives.
+        </p>
+      </div>
+
+      <!-- Editorial Intro Copy -->
+      <div class="mt-2 max-w-[820px] flex flex-col gap-3 text-body-md md:text-body-lg text-body text-slate-700 leading-relaxed">
+        <p>
+          Great fiction leaves an indelible mark. We go beyond surface-level hype to analyze structural pacing, character arcs, thematic resolution, and the craft behind memorable works.
+        </p>
+        <p class="text-slate-600 text-body-md">
+          Whether you seek timeless classics or bold modern experiments, our reviews help you find stories worthy of your investment.
+        </p>
+      </div>
+
+      <!-- Editorial Standards Pill -->
+      <div class="mt-4 pt-4 border-t border-hairline flex flex-wrap items-center gap-3">
+        <span class="font-mono text-caption uppercase tracking-widest text-mute">Review Standard</span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-canvas-soft border border-hairline text-body-sm font-medium text-ink">
+          <span>Unbiased.</span>
+          <span class="text-mute">·</span>
+          <span>Story-First.</span>
+          <span class="text-mute">·</span>
+          <span class="text-violet-600">Thematic Precision.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main 3-Column Reviews Showcase Grid -->
+  <section class="w-full bg-canvas py-12 md:py-16 px-lg">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-10">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-4">
+        <div>
+          <h2 class="text-display-sm md:text-display-md font-semibold text-ink tracking-tight">
+            Curated Reviews & Masterpiece Analysis
+          </h2>
+          <p class="text-body-sm text-mute mt-1">
+            Carefully examined titles evaluated across worldbuilding, character depth, and emotional resonance.
+          </p>
+        </div>
+        <div class="text-caption font-mono text-mute">
+          {featuredReviews.length} Essential Titles
         </div>
       </div>
 
-      {latestReviews.length ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
-          {latestReviews.map((post) => (
-            <Card variant="marketing" class="group">
-              <div class="flex flex-col gap-md h-full">
-                <div class="flex flex-wrap gap-xs">
-                  {post.data.tags.slice(0, 2).map((tag) => (
-                    <Badge>{tag}</Badge>
+      <!-- 3-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredReviews.map((item, index) => (
+          <article 
+            class="group flex flex-col bg-white rounded-2xl border border-hairline hover:border-slate-300 transition-all duration-300 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(15,23,42,0.12)] overflow-hidden"
+          >
+            <!-- Card Image Showcase -->
+            <div class="relative w-full overflow-hidden border-b border-hairline bg-slate-100">
+              <img 
+                src={item.image} 
+                alt={`${item.title} artwork`}
+                class="anime-card-image transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                loading={index < 3 ? 'eager' : 'lazy'}
+              />
+              
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
+
+              <!-- Top Badges -->
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-mono font-medium tracking-wide uppercase bg-black/75 text-white backdrop-blur-md border border-white/20 shadow-sm">
+                  {item.category}
+                </span>
+
+                {item.badge && (
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide uppercase bg-violet-600 text-white shadow-md">
+                    <span>★</span>
+                    <span>{item.badge}</span>
+                  </span>
+                )}
+              </div>
+
+              <!-- Bottom Score Plaque -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                <span class="text-[12px] font-mono text-white/90 drop-shadow-md">
+                  #{String(index + 1).padStart(2, '0')} Selection
+                </span>
+                <span class="text-[12px] font-mono font-semibold px-2 py-0.5 rounded bg-black/70 text-amber-300 border border-white/10">
+                  {item.score}
+                </span>
+              </div>
+            </div>
+
+            <!-- Review Details & Analysis -->
+            <div class="p-6 flex flex-col flex-1 justify-between gap-4">
+              <div class="flex flex-col gap-2.5">
+                <!-- Genre List -->
+                <div class="flex items-center flex-wrap gap-1.5 text-caption font-medium text-violet-600">
+                  {item.genres.map((genre, gIdx) => (
+                    <span class="inline-flex items-center">
+                      <span>{genre}</span>
+                      {gIdx < item.genres.length - 1 && (
+                        <span class="text-slate-300 mx-1.5 font-normal">·</span>
+                      )}
+                    </span>
                   ))}
                 </div>
-                <h2 class="text-display-sm font-semibold tracking-[-0.6px] text-ink">{post.data.title}</h2>
-                <p class="text-body-sm text-body line-clamp-4">{post.data.description}</p>
-                <div class="mt-auto flex items-center justify-between text-caption text-mute pt-md border-t border-hairline">
-                  <span>{post.data.author}</span>
-                  <span>{new Date(post.data.pubDate).toLocaleDateString()}</span>
+
+                <!-- Title -->
+                <div>
+                  <h3 class="text-display-sm font-semibold text-ink group-hover:text-violet-600 transition-colors leading-snug">
+                    {item.title}
+                  </h3>
                 </div>
+
+                <!-- Pull Quote -->
+                <blockquote class="border-l-2 border-violet-400 pl-3 py-0.5 my-1 text-body-sm italic text-slate-800 font-medium">
+                  "{item.quote}"
+                </blockquote>
+
+                <!-- Review Text -->
+                <p class="text-body-sm text-body text-slate-600 leading-relaxed mt-1">
+                  {item.review}
+                </p>
               </div>
-            </Card>
-          ))}
+
+              <!-- Hallmarks / Key Highlights -->
+              {item.hallmarks && (
+                <div class="pt-4 border-t border-hairline mt-auto">
+                  <p class="text-[11px] font-mono uppercase tracking-wider text-mute mb-1.5">Hallmarks</p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {item.hallmarks.map((h) => (
+                      <span class="text-[11px] px-2 py-0.5 rounded bg-slate-50 border border-slate-200/70 text-slate-600">
+                        {h}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Retrospective Archive & Quick Takes Section -->
+  <section class="w-full bg-canvas-soft py-16 px-lg border-t border-hairline">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="font-mono text-caption uppercase tracking-wider text-violet-600 font-medium">Retrospective Vault</span>
+          <h2 class="text-display-md font-semibold text-ink tracking-tight mt-1">
+            Quick Takes & Cult Classics
+          </h2>
+          <p class="text-body-sm text-body text-mute max-w-[680px] mt-1">
+            Condensed impressions and distinctive highlights from influential works across genres.
+          </p>
         </div>
-      ) : (
-        <p class="text-body text-mute">No reviews have been added yet. Create Markdown files in <code>src/content/reviews/</code>.</p>
-      )}
+        <span class="text-caption font-mono text-mute hidden sm:inline">Archive Entries</span>
+      </div>
+
+      <!-- Quick Take Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {quickTakeArchive.map((entry) => (
+          <div class="bg-white p-5 rounded-xl border border-hairline hover:border-slate-300 transition-colors flex flex-col justify-between gap-3 shadow-xs">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-violet-50 text-violet-700 border border-violet-100 font-medium">
+                  {entry.badge}
+                </span>
+                <span class="text-[11px] font-mono font-semibold text-slate-700">
+                  {entry.score}
+                </span>
+              </div>
+              <h4 class="text-[17px] font-semibold text-ink leading-snug">
+                {entry.title}
+              </h4>
+              <p class="text-[13px] italic text-slate-700">
+                "{entry.quote}"
+              </p>
+              <p class="text-body-sm text-slate-600 leading-relaxed mt-1">
+                {entry.summary}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Editorial Discussion Callout -->
+      <div class="mt-4 p-6 rounded-2xl border border-dashed border-slate-300 bg-white/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h4 class="text-body-md font-semibold text-ink">Disagree with a critique or have an anime to recommend?</h4>
+          <p class="text-body-sm text-mute mt-0.5">
+            We welcome analytical discourse and member-submitted editorial proposals.
+          </p>
+        </div>
+        <a 
+          href="mailto:admin@mangaanimewebtoon.com?subject=Editorial%20Feedback%20or%20Review%20Pitch" 
+          class="shrink-0 px-4 py-2 rounded-full bg-ink text-white hover:bg-slate-800 text-body-sm font-medium transition-colors"
+        >
+          Submit Editorial Thoughts
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
