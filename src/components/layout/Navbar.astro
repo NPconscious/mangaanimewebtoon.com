@@ -1,18 +1,48 @@
 ---
-import Button from '../ui/Button.astro';
+import Button from "../ui/Button.astro";
 ---
 
 <nav class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-xl border-b border-hairline shadow-sm">
   <div class="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-sm md:px-lg">
-    <a href="/" class="text-ink font-semibold text-[18px] tracking-tight">
-      Manga Anime Webtoon
+    <a
+      href="/"
+      class="flex items-center gap-3 text-ink font-semibold text-[18px] tracking-tight group"
+    >
+      <img
+        src="/logo.webp"
+        alt="Manga Anime Webtoon Emblem"
+        class="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover shadow-xs border border-purple-100 group-hover:scale-105 transition-transform duration-200"
+      />
+      <span class="text-ink font-semibold text-[18px] tracking-tight group-hover:text-purple-900 transition-colors">
+        Manga Anime Webtoon
+      </span>
     </a>
 
     <div class="hidden md:flex items-center gap-2">
-      <a href="/news" class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors">News</a>
-      <a href="/reviews" class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors">Reviews</a>
-      <a href="/webnovels" class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors">Web Novels</a>
-      <a href="/trending" class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors">Trending</a>
+      <a
+        href="/news"
+        class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors"
+      >
+        News
+      </a>
+      <a
+        href="/reviews"
+        class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors"
+      >
+        Reviews
+      </a>
+      <a
+        href="/webnovels"
+        class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors"
+      >
+        Web Novels
+      </a>
+      <a
+        href="/trending"
+        class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors"
+      >
+        Trending
+      </a>
     </div>
   </div>
 </nav>
