@@ -1,8 +1,10 @@
 ---
+const isHomePage = Astro.url.pathname === "/";
 ---
 
-<footer class="bg-white/95 text-body py-4xl px-lg border-t border-hairline shadow-inner mt-auto">
-  <div class="max-w-[1400px] mx-auto">
+<footer class="closing bg-white/95 text-body py-4xl px-lg border-t border-hairline shadow-inner mt-auto">
+  {isHomePage && <div class="sakura-pile" aria-hidden="true"></div>}
+  <div class="wrap max-w-[1400px] mx-auto">
     <div class="mb-lg flex items-center gap-3">
       <img 
         src="/logo.webp" 
@@ -14,7 +16,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-xl mb-4xl">
       <div class="flex flex-col gap-md">
-        <a href="mailto:admin@mangaanimewebtoon.com" class="text-link hover:underline text-body-sm">admin@mangaanimewebtoon.com</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=admin%40mangaanimewebtoon.com" target="_blank" rel="noopener noreferrer" class="text-link hover:underline text-body-sm">admin@mangaanimewebtoon.com</a>
       </div>
 
       <div class="flex flex-col gap-md">

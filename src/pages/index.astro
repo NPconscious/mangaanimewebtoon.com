@@ -1,166 +1,206 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Button from "../components/ui/Button.astro";
 import Card from "../components/ui/Card.astro";
 ---
 
 <Layout title="Manga Anime Webtoon">
   <!-- Hero Section -->
-  <section class="relative w-full overflow-hidden bg-canvas py-section px-lg flex flex-col items-center text-center">
-    <!-- Mesh Gradient Background (Vercel Inspired) -->
-    <div class="absolute inset-0 z-0 opacity-40 pointer-events-none overflow-hidden flex justify-center">
-      <div class="absolute top-[-10%] w-[800px] h-[400px] bg-gradient-to-r from-[var(--color-gradient-develop-start)] via-[var(--color-gradient-preview-start)] to-[var(--color-gradient-ship-start)] blur-[100px] rounded-full mix-blend-multiply"></div>
-      <div class="absolute top-[10%] w-[600px] h-[300px] bg-gradient-to-r from-[var(--color-gradient-develop-end)] via-[var(--color-gradient-preview-end)] to-[var(--color-gradient-ship-end)] blur-[80px] rounded-full mix-blend-multiply opacity-70"></div>
+  <section class="home-hero relative w-full overflow-hidden text-left" data-enter>
+    <div class="home-hero__inner wrap">
+    <div class="home-hero__tiles" aria-hidden="true">
+      <div class="home-hero__tile"><img src="/anime/dandadan.jpg" alt="" /></div>
+      <div class="home-hero__tile"><img src="/anime/frieren.jpg" alt="" /></div>
+      <div class="home-hero__tile"><img src="/anime/kagurabachi.jpg" alt="" /></div>
     </div>
 
-    <div class="relative z-10 max-w-[800px] flex flex-col items-center gap-md">
-      <div class="inline-flex items-center gap-2 rounded-full border border-hairline bg-white/90 px-sm py-xs text-body-sm font-semibold text-ink shadow-sm backdrop-blur">
-        <span>✨</span>
+    <div class="home-hero__content relative z-10 flex flex-col items-start gap-md">
+      <a href="/news" class="home-hero__badge inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white/75 px-sm py-xs text-body-sm font-semibold text-violet-deep shadow-sm backdrop-blur">
         <span>New Season Announcements</span>
-      </div>
-      <h1 class="text-display-xl font-semibold tracking-[-2.4px] text-ink max-w-[15ch]">
-        The heartbeat of anime and manga culture...
+      </a>
+      <h1 class="home-hero__title text-display-xl font-semibold tracking-[-2.4px] text-ink max-w-[15ch]">
+        Anime, manga and web novel coverage
       </h1>
-      <p class="text-body-lg text-body max-w-[600px]">
-        Discover the latest breaking news, deep-dive reviews, and web novel
-        recommendations tailored for the ultimate fan experience.
+      <p class="home-hero__description text-body-lg text-body max-w-[600px]">
+        News, reviews, web novel recommendations and rankings, in one place.
       </p>
+    </div>
     </div>
   </section>
 
   <!-- Section Previews -->
-  <section class="w-full bg-transparent py-5xl px-lg">
-    <div class="max-w-[1400px] mx-auto rounded-[40px] border border-white/60 bg-white/80 p-lg shadow-[0_40px_120px_-80px_rgba(15,23,42,0.15)] backdrop-blur-xl flex flex-col gap-xl">
-      <Card class="p-lg border border-hairline bg-white shadow-[0_24px_48px_-28px_rgba(15,23,42,0.35)] w-full">
-        <div class="flex flex-col gap-lg lg:flex-row lg:items-start">
-          <div class="overflow-hidden rounded-[28px] border border-slate-200 lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img
-              src="/anime/ghost-in-the-shell.jpg"
-              alt="Latest announcement"
-              class="h-full w-full object-cover"
-            />
-          </div>
-          <div class="flex-1 flex flex-col justify-between">
+  <section class="home-previews w-full bg-transparent py-5xl px-lg">
+    <div class="home-preview-list wrap">
+      <Card class="home-preview-card w-full">
+        <div class="home-preview-card__layout flex flex-col gap-lg lg:flex-row lg:items-start">
+          <div class="home-preview-card__copy flex-1 flex flex-col justify-between">
             <div>
               <p class="font-mono text-caption uppercase tracking-wider text-indigo-500">
                 News
               </p>
               <h2 class="text-display-sm font-semibold text-ink">
-                Latest announcements
+                Anime release news
               </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Stay updated with release dates, studio news, and major anime
-                industry stories.
-                <br />
-                Get fast summaries from the biggest announcements.
-                <br />
-                Perfect for fans tracking new season updates.
+                Follow release dates, studio announcements and production updates.
               </p>
             </div>
-            <Button href="/news" variant="secondary" size="sm">
-              View News
-            </Button>
+            <a class="home-preview-link" href="/news" aria-label="Read anime news">
+              <span class="home-preview-link__kanji" aria-hidden="true">&#26032;</span>
+              <span>Read news</span>
+              <span class="home-preview-link__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="home-preview-card__image overflow-hidden rounded-[18px] bg-canvas">
+            <img
+              src="/anime/ghost-in-the-shell.jpg"
+              alt=""
+              class="h-full w-full object-cover"
+            />
           </div>
         </div>
       </Card>
 
-      <Card class="p-lg border border-indigo-100 bg-[#eef2ff] shadow-[0_20px_50px_-32px_rgba(99,102,241,0.45)] w-full">
-        <div class="flex flex-col gap-lg lg:flex-row-reverse lg:items-start">
-          <div class="overflow-hidden rounded-[28px] border border-indigo-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img
-              src="/anime/frieren.jpg"
-              alt="Review artwork"
-              class="h-full w-full object-cover"
-            />
-          </div>
-          <div class="flex-1 flex flex-col justify-between">
+      <Card class="home-preview-card w-full">
+        <div class="home-preview-card__layout flex flex-col gap-lg lg:flex-row lg:items-start">
+          <div class="home-preview-card__copy flex-1 flex flex-col justify-between">
             <div>
               <p class="font-mono text-caption uppercase tracking-wider text-indigo-600">
                 Reviews
               </p>
               <h2 class="text-display-sm font-semibold text-ink">
-                Thoughtful analysis
+                Anime and manga reviews
               </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Read in-depth opinions across anime, manga, and webtoons.
-                <br />
-                Discover ratings and recommendations from our team.
-                <br />
-                Find the best picks for your next watch or read.
+                Reviews of anime, manga and webtoons, with scores and notes on story, characters and art.
               </p>
             </div>
-            <Button href="/reviews" variant="secondary" size="sm">
-              See Reviews
-            </Button>
+            <a class="home-preview-link" href="/reviews" aria-label="Read anime and manga reviews">
+              <span class="home-preview-link__kanji" aria-hidden="true">&#35413;</span>
+              <span>Read reviews</span>
+              <span class="home-preview-link__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="home-preview-card__image overflow-hidden rounded-[18px] bg-canvas">
+            <img src="/anime/frieren.jpg" alt="" class="h-full w-full object-cover" />
           </div>
         </div>
       </Card>
 
-      <Card class="p-lg border border-cyan-100 bg-[#ecfeff] shadow-[0_20px_50px_-32px_rgba(6,182,212,0.35)] w-full">
-        <div class="flex flex-col gap-lg lg:flex-row lg:items-start">
-          <div class="overflow-hidden rounded-[28px] border border-cyan-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img
-              src="/covers/lord-of-the-mysteries.jpg"
-              alt="Featured Web Novels"
-              class="h-full w-full object-cover"
-            />
-          </div>
-          <div class="flex-1 flex flex-col justify-between">
+      <Card class="home-preview-card w-full">
+        <div class="home-preview-card__layout flex flex-col gap-lg lg:flex-row lg:items-start">
+          <div class="home-preview-card__copy flex-1 flex flex-col justify-between">
             <div>
               <p class="font-mono text-caption uppercase tracking-wider text-cyan-600">
                 Web Novels
               </p>
               <h2 class="text-display-sm font-semibold text-ink">
-                Beyond the Chapters
+                Web novel recommendations
               </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Explore curated web novels with intricate world-building, deep
-                characters, and unforgettable plots.
-                <br />
-                From dark fantasy and supernatural mysteries to progression
-                epics.
-                <br />
-                Stories that deserve a place on every reader's list.
+                Browse fantasy, mystery and progression fiction by premise, genre and status.
               </p>
             </div>
-            <Button href="/webnovels" variant="secondary" size="sm">
-              Browse Web Novels
-            </Button>
+            <a class="home-preview-link" href="/webnovels" aria-label="Browse web novels">
+              <span class="home-preview-link__kanji" aria-hidden="true">&#25991;</span>
+              <span>Browse novels</span>
+              <span class="home-preview-link__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="home-preview-card__image overflow-hidden rounded-[18px] bg-canvas">
+            <img src="/covers/lord-of-the-mysteries.jpg" alt="" class="h-full w-full object-cover" />
           </div>
         </div>
       </Card>
 
-      <Card class="p-lg border border-rose-100 bg-[#fff1f2] shadow-[0_20px_50px_-32px_rgba(244,63,94,0.25)] w-full">
-        <div class="flex flex-col gap-lg lg:flex-row-reverse lg:items-start">
-          <div class="overflow-hidden rounded-[28px] border border-rose-200 shadow-sm lg:w-[320px] w-full h-[320px] bg-canvas">
-            <img
-              src="/trending.jpg"
-              alt="Trending highlights"
-              class="h-full w-full object-cover"
-            />
-          </div>
-          <div class="flex-1 flex flex-col justify-between">
+      <Card class="home-preview-card w-full">
+        <div class="home-preview-card__layout flex flex-col gap-lg lg:flex-row lg:items-start">
+          <div class="home-preview-card__copy flex-1 flex flex-col justify-between">
             <div>
               <p class="font-mono text-caption uppercase tracking-wider text-rose-600">
                 Trending
               </p>
               <h2 class="text-display-sm font-semibold text-ink">
-                What’s hot now
+                Trending rankings
               </h2>
               <p class="text-body-sm text-body text-mute mt-sm">
-                Discover current fan favorites across anime, manga, and manhwa.
-                <br />
-                Stay on top of the latest trends and must-see titles.
-                <br />
-                See what the community is talking about now.
+                See ranked anime, manga, manhwa and web novels, with each title’s category and movement.
               </p>
             </div>
-            <Button href="/trending" variant="secondary" size="sm">
-              Check Trending
-            </Button>
+            <a class="home-preview-link" href="/trending" aria-label="View trending titles">
+              <span class="home-preview-link__kanji" aria-hidden="true">&#35441;</span>
+              <span>View rankings</span>
+              <span class="home-preview-link__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="home-preview-card__image overflow-hidden rounded-[18px] bg-canvas">
+            <img src="/trending.jpg" alt="" class="h-full w-full object-cover" />
           </div>
         </div>
       </Card>
     </div>
   </section>
+
 </Layout>
+
+<script>
+  const sakuraLayer = document.querySelector<HTMLElement>(".sakura-fall");
+  const sakuraPile = document.querySelector<HTMLElement>(".sakura-pile");
+  const homeFooter = document.querySelector<HTMLElement>(".home-page footer");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (sakuraLayer && sakuraPile && homeFooter && !reducedMotion) {
+    let activePetals = 0;
+
+    const releasePetal = (startY: number, delay = 0) => {
+      const footerBottom = homeFooter.getBoundingClientRect().bottom + window.scrollY;
+      const landingOffset = 8 + Math.random() * 28;
+      const landingY = footerBottom - landingOffset;
+      const originY = Math.min(startY, landingY - 100);
+      const petal = document.createElement("span");
+      const start = Math.random() * 96;
+      const drift = Math.random() * 120 - 60;
+      const rotation = 360 + Math.random() * 540;
+
+      petal.style.top = `${originY}px`;
+      petal.style.left = `${start}%`;
+      petal.style.setProperty("--sakura-size", `${7 + Math.random() * 6}px`);
+      sakuraLayer.append(petal);
+      activePetals += 1;
+
+      const fall = petal.animate(
+        [
+          { transform: "translate3d(0, -24px, 0) rotate(0deg)", opacity: 0 },
+          { transform: `translate3d(${drift}px, ${landingY - originY}px, 0) rotate(${rotation}deg)`, opacity: 0.58 },
+        ],
+        { duration: 9000 + Math.random() * 8000, delay, easing: "linear", fill: "forwards" },
+      );
+
+      fall.onfinish = () => {
+        const settledPetal = document.createElement("span");
+        settledPetal.style.left = `${Math.random() * 96}%`;
+        settledPetal.style.bottom = `${4 + Math.random() * 36}px`;
+        settledPetal.style.setProperty("--sakura-size", `${7 + Math.random() * 7}px`);
+        settledPetal.style.transform = `rotate(${Math.random() * 360}deg)`;
+        sakuraPile.append(settledPetal);
+        if (sakuraPile.childElementCount > 40) sakuraPile.firstElementChild?.remove();
+        petal.remove();
+        activePetals -= 1;
+      };
+    };
+
+    for (let index = 0; index < 16; index += 1) releasePetal(0, index * 280);
+
+    let lastScrollY = window.scrollY;
+    let scrollDistance = 0;
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+      scrollDistance += Math.abs(currentScrollY - lastScrollY);
+      lastScrollY = currentScrollY;
+
+      if (scrollDistance >= 260 && activePetals < 20) {
+        scrollDistance %= 260;
+        releasePetal(Math.max(0, currentScrollY - 24));
+      }
+    }, { passive: true });
+  }
+</script>

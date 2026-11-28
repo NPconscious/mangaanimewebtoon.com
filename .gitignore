@@ -23,6 +23,10 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# Local agent instructions and skills
+.agents/
+.taste-skill/
+
 # executable files
 *.exe
 

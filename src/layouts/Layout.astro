@@ -9,10 +9,11 @@ interface Props {
 }
 
 const { title, description = "Manga Anime Webtoon - Your ultimate source for the latest news." } = Astro.props;
+const isHomePage = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-type={isHomePage ? "service" : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -22,19 +23,24 @@ const { title, description = "Manga Anime Webtoon - Your ultimate source for the
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
+    {isHomePage && <meta name="page-type" content="service" />}
+    {isHomePage && <meta name="site-kind" content="other" />}
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
     
     <title>{title}</title>
   </head>
-  <body class="flex flex-col min-h-screen">
+  <body class:list={["flex flex-col min-h-screen", { "home-page": Astro.url.pathname === "/" }]}>
     <Navbar />
     <main class="flex-1 w-full flex flex-col items-center">
       <slot />
     </main>
+    {isHomePage && (
+      <div class="sakura-fall" aria-hidden="true"></div>
+    )}
     <Footer />
   </body>
 </html>

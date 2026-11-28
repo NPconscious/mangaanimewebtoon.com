@@ -1,9 +1,9 @@
 ---
-import Button from "../ui/Button.astro";
 ---
 
+<header class="home-header">
 <nav class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-xl border-b border-hairline shadow-sm">
-  <div class="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-sm md:px-lg">
+  <div class="mx-auto flex h-[72px] max-w-[1180px] items-center justify-between px-4 md:px-0">
     <a
       href="/"
       class="flex items-center gap-3 text-ink font-semibold text-[18px] tracking-tight group"
@@ -18,7 +18,7 @@ import Button from "../ui/Button.astro";
       </span>
     </a>
 
-    <div class="hidden md:flex items-center gap-2">
+    <div class="home-nav-links flex items-center gap-1 md:gap-2">
       <a
         href="/news"
         class="text-body text-[14px] font-medium px-sm py-xs rounded-full hover:bg-canvas-soft transition-colors"
@@ -46,3 +46,4 @@ import Button from "../ui/Button.astro";
     </div>
   </div>
 </nav>
+</header>

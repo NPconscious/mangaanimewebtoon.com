@@ -21,7 +21,7 @@ const featuredNovels: WebNovel[] = [
     author: 'Cuttlefish That Loves Diving',
     origin: 'Chinese Web Novel',
     genres: ['Fantasy', 'Mystery', 'Supernatural'],
-    description: 'A man awakens in a mysterious Victorian-inspired world filled with secret societies, ancient powers and forbidden knowledge.',
+    description: 'A man awakens in a Victorian-inspired world of secret societies, unusual powers and hidden history.',
     coverImage: '/covers/lord-of-the-mysteries.jpg',
     featuredBadge: 'Must Feature',
     highlights: ['Victorian Steampunk', 'Eldritch Lore', 'Complex Magic System'],
@@ -32,7 +32,7 @@ const featuredNovels: WebNovel[] = [
     author: 'Guiltythree',
     origin: 'Western Web Serial',
     genres: ['Dark Fantasy', 'Action', 'Adventure'],
-    description: 'In a world consumed by nightmares, survival means confronting terrifying creatures and uncovering the secrets of a broken world.',
+    description: 'In a world threatened by nightmares, a young man faces dangerous creatures and searches for answers.',
     coverImage: '/covers/shadow-slave.jpg',
     highlights: ['Nightmarish Spell', 'Cunning Anti-Hero', 'Atmospheric Dread'],
   },
@@ -52,7 +52,7 @@ const featuredNovels: WebNovel[] = [
     author: 'Gu Zhen Ren',
     origin: 'Chinese Web Novel',
     genres: ['Dark Fantasy', 'Strategy', 'Cultivation'],
-    description: 'A ruthless protagonist travels through a world governed by supernatural Gu abilities, ambition and brutal competition.',
+    description: 'A ruthless protagonist pursues power in a world where people use supernatural Gu abilities.',
     coverImage: '/covers/reverend-insanity.jpg',
     highlights: ['Ruthless Realism', 'Gu System', 'Philosophical Schemes'],
   },
@@ -62,7 +62,7 @@ const featuredNovels: WebNovel[] = [
     author: 'Maxime J. Durand',
     origin: 'Western Web Serial',
     genres: ['Sci-Fi', 'Comedy', 'Time Loop'],
-    description: 'A man with the ability to reset time attempts to find the perfect outcome in a chaotic superpowered world.',
+    description: 'A man who can reset time searches for an outcome he can accept in a world of superpowers.',
     coverImage: '/covers/the-perfect-run.jpg',
     highlights: ['Deadpan Humor', 'Superpower Dystopia', 'Emotional Depth'],
   },
@@ -92,7 +92,7 @@ const featuredNovels: WebNovel[] = [
     author: 'singNsong',
     origin: 'Korean Web Novel',
     genres: ['Fantasy', 'Apocalypse', 'Psychological'],
-    description: 'The only reader of an obscure web novel discovers that its fictional world has become reality, and he alone knows how the story unfolds.',
+    description: 'The only reader of a web novel finds its events unfolding in the real world, with knowledge of what comes next.',
     coverImage: '/covers/omniscient-readers-viewpoint.jpg',
     highlights: ['Meta-Fiction Masterpiece', 'Constellations', 'Psychological Drama'],
   },
@@ -104,7 +104,7 @@ const upcomingNovels = [
     author: 'TurtleMe',
     origin: 'Western Web Serial',
     genres: ['Progression Fantasy', 'Reincarnation'],
-    teaser: 'A former monarch awakens into a world of magic and monsters, seeking purpose beyond a lifetime of isolation and regret.',
+    teaser: 'A former monarch is reborn in a world of magic and monsters and tries to build a different life.',
     status: 'Editorial In Review',
   },
   {
@@ -112,7 +112,7 @@ const upcomingNovels = [
     author: 'Dorae',
     origin: 'Korean Web Novel',
     genres: ['Cultivation', 'Time Loop', 'Philosophy'],
-    teaser: 'Without peerless talent or miraculous cheats, an ordinary cultivator relives lifetimes striving for enlightenment and sincere human connection.',
+    teaser: 'An ordinary cultivator relives multiple lifetimes while pursuing enlightenment and connection with others.',
     status: 'Upcoming Feature',
   },
   {
@@ -120,7 +120,7 @@ const upcomingNovels = [
     author: 'Ro Yu-jin',
     origin: 'Korean Web Novel',
     genres: ['Dark Fantasy', 'Redemption', 'Psychological'],
-    teaser: 'Haunted by past failures and guided by fleeting emotional echoes, a young man enters the brutal realm of Paradise for one last shot at redemption.',
+    teaser: 'A young man enters Paradise, a dangerous world, hoping to make amends for past failures.',
     status: 'Upcoming Feature',
   },
   {
@@ -128,7 +128,7 @@ const upcomingNovels = [
     author: 'Shin Noah',
     origin: 'Korean Web Novel',
     genres: ['Tower Climb', 'Psychological', 'Drama'],
-    teaser: 'A deeply moving exploration of empathy and human tragedy disguised as a tower-climbing regression adventure.',
+    teaser: 'A tower-climbing story that combines regression with questions of empathy and loss.',
     status: 'Editorial In Review',
   },
   {
@@ -136,7 +136,7 @@ const upcomingNovels = [
     author: 'Cuttlefish That Loves Diving',
     origin: 'Chinese Web Novel',
     genres: ['Lovecraftian', 'Mystery', 'Steampunk'],
-    teaser: 'Ghost ships, eldritch anomalies, and forgotten deities across a fog-shrouded archipelago where nothing is as it seems.',
+    teaser: 'Ghost ships and strange deities appear across a fog-covered archipelago.',
     status: 'Upcoming Feature',
   },
   {
@@ -144,7 +144,7 @@ const upcomingNovels = [
     author: 'RinoZ',
     origin: 'Western Web Serial',
     genres: ['Progression Fantasy', 'Monster Evolution', 'Comedy'],
-    teaser: 'Reborn as an ant in a monstrous underground abyss, one devoted colony defender climbs the evolutionary ladder through sheer grit and family devotion.',
+    teaser: 'Reborn as an ant underground, the protagonist helps defend the colony and evolves over time.',
     status: 'Under Evaluation',
   },
 ];
@@ -152,7 +152,7 @@ const upcomingNovels = [
 
 <Layout 
   title="Beyond the Chapters — Featured Web Novels | Manga Anime Webtoon" 
-  description="Discover exceptional web novels from across the world. Deep world-building, intricate character development, and unforgettable storytelling."
+  description="Web novel recommendations with summaries, genres and status notes across fantasy, mystery and progression fiction."
 >
   <!-- Hero Section with Literary Editorial Tone -->
   <section class="relative w-full overflow-hidden bg-canvas pt-16 pb-12 md:pt-24 md:pb-16 px-lg border-b border-hairline">
@@ -174,32 +174,31 @@ const upcomingNovels = [
       <!-- Main Headline -->
       <div class="flex flex-col gap-3">
         <h1 class="text-display-lg md:text-display-xl font-semibold tracking-[-1.5px] md:tracking-[-2px] text-ink max-w-[20ch]">
-          Beyond the Chapters
+          Web novel recommendations
         </h1>
         <p class="text-display-sm font-normal text-body text-slate-600 tracking-tight max-w-[32ch]">
-          Stories Beyond the Pages
+          Browse by genre and premise
         </p>
       </div>
 
       <!-- Editorial Intro Copy -->
       <div class="mt-2 max-w-[820px] flex flex-col gap-3 text-body-md md:text-body-lg text-body text-slate-700 leading-relaxed">
         <p>
-          Some stories are too big to be confined to a screen. Explore a collection of remarkable web novels filled with extraordinary worlds, unforgettable characters, intricate plots and limitless imagination.
+          Browse web novels across fantasy, mystery and progression fiction. Each listing includes a premise, author, genre and status.
         </p>
         <p class="text-slate-600 text-body-md">
-          From dark fantasy and supernatural mysteries to progression adventures and psychological thrillers, discover your next favourite story.
+          Choose a title by genre, premise or current status.
         </p>
       </div>
 
       <!-- Editorial Motto Pill -->
       <div class="mt-4 pt-4 border-t border-hairline flex flex-wrap items-center gap-3">
-        <span class="font-mono text-caption uppercase tracking-widest text-mute">Core Philosophy</span>
+        <span class="font-mono text-caption uppercase tracking-widest text-mute">Origins</span>
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-canvas-soft border border-hairline text-body-sm font-medium text-ink">
-          <span>Explore.</span>
+          <span class="text-indigo-600">Chinese, Korean and Western serials</span>
           <span class="text-mute">·</span>
           <span>Read.</span>
           <span class="text-mute">·</span>
-          <span class="text-indigo-600">Get Lost in the Story.</span>
         </div>
       </div>
     </div>
@@ -214,7 +213,7 @@ const upcomingNovels = [
             Featured Web Novels
           </h2>
           <p class="text-body-sm text-mute mt-1">
-            Curated mix of celebrated Chinese, Korean, and Western web fiction chosen for literary craft and storytelling.
+            Chinese, Korean and Western serials, with a premise, author and genre for each title.
           </p>
         </div>
         <div class="text-caption font-mono text-mute">
@@ -323,7 +322,7 @@ const upcomingNovels = [
             Upcoming Web Novels & Reader Suggestions
           </h2>
           <p class="text-body-sm text-body text-mute max-w-[680px] mt-1">
-            Titles currently being evaluated by our editorial desk for comprehensive features, reading guides, and literary essays.
+            These titles are under review for future features and reading guides.
           </p>
         </div>
         <span class="text-caption font-mono text-mute hidden sm:inline">6 Works Queued</span>
@@ -360,13 +359,15 @@ const upcomingNovels = [
       <!-- Suggest a Novel Callout Box -->
       <div class="mt-4 p-6 rounded-2xl border border-dashed border-slate-300 bg-white/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h4 class="text-body-md font-semibold text-ink">Have a web novel worth featuring?</h4>
+          <h4 class="text-body-md font-semibold text-ink">Have a web novel to recommend?</h4>
           <p class="text-body-sm text-mute mt-0.5">
-            We actively seek stories with standout world-building, exceptional writing, and original magic or progression systems.
+            Send us the title and what you like about it.
           </p>
         </div>
         <a 
-          href="mailto:admin@mangaanimewebtoon.com?subject=Web%20Novel%20Recommendation" 
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=admin%40mangaanimewebtoon.com&su=Web%20Novel%20Recommendation"
+          target="_blank"
+          rel="noopener noreferrer"
           class="shrink-0 px-4 py-2 rounded-full bg-ink text-white hover:bg-slate-800 text-body-sm font-medium transition-colors"
         >
           Submit a Recommendation
