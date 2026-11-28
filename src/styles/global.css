@@ -1195,3 +1195,233 @@
 @media (prefers-reduced-motion: reduce) {
   .sakura-fall { display: none; }
 }
+
+/* Three portrait frames balance the hero copy and brand art. */
+.home-hero__tiles {
+  top: 50%;
+  right: clamp(24px, 5vw, 72px);
+  bottom: auto;
+  width: min(45vw, 560px);
+  height: min(65vh, 390px);
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.12fr) minmax(0, .92fr);
+  grid-template-rows: minmax(0, 1fr);
+  align-items: center;
+  gap: 13px;
+  transform: translateY(-50%);
+}
+
+.home-hero__tile {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  height: 82%;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: 21px;
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 18px 42px rgba(45, 29, 62, .16);
+  backdrop-filter: blur(9px);
+}
+
+.home-hero__tile:nth-child(1) {
+  transform: translateY(18px) rotate(-2deg);
+}
+
+.home-hero__tile:nth-child(2) {
+  height: 100%;
+  transform: translateY(-4px);
+}
+
+.home-hero__tile:nth-child(3) {
+  transform: translateY(18px) rotate(2deg);
+}
+
+.home-hero__tile img {
+  position: absolute;
+  inset: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  border-radius: 15px;
+  opacity: 0;
+  object-fit: cover;
+  transform: scale(1.045);
+  transition: opacity 1s cubic-bezier(.22, .72, .25, 1), transform 1.25s cubic-bezier(.2, .7, .25, 1);
+}
+
+.home-hero__tile img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 1000px) and (min-width: 761px) {
+  .home-hero__tiles {
+    right: 0;
+    width: 40%;
+    height: min(55vh, 340px);
+    gap: 9px;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-hero__tiles {
+    top: auto;
+    right: 50%;
+    bottom: -138px;
+    width: min(calc(100% - 32px), 500px);
+    height: 210px;
+    gap: 9px;
+    transform: translateX(50%);
+  }
+
+  .home-hero__tile {
+    padding: 4px;
+    border-radius: 15px;
+  }
+
+  .home-hero__tile img {
+    inset: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    border-radius: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__tile img { transition: none; transform: none; }
+}
+
+@media (max-width: 760px) {
+  .home-hero {
+    height: auto;
+    min-height: clamp(740px, 92svh, 820px);
+    padding: 104px 0 120px;
+  }
+
+  .home-hero__inner {
+    min-height: 500px;
+    align-items: flex-start;
+  }
+
+  .home-hero__content {
+    width: 100%;
+    gap: 16px;
+    padding-top: 8px;
+  }
+
+  .home-hero__badge {
+    min-height: 40px;
+    padding: 8px 13px;
+    font-size: 13px;
+  }
+
+  .home-hero__title {
+    max-width: 12ch;
+    font-size: clamp(2.35rem, 9vw, 3.2rem);
+    line-height: 1.04;
+    letter-spacing: -.05em;
+  }
+
+  .home-hero__description {
+    max-width: 34ch;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .home-hero__tiles {
+    right: 50%;
+    bottom: -84px;
+    width: min(calc(100% - 16px), 500px);
+    height: 190px;
+    gap: 8px;
+    transform: translateX(50%);
+  }
+
+  .home-hero__tile {
+    height: 82%;
+    padding: 4px;
+    border-radius: 15px;
+    transform: none !important;
+  }
+
+  .home-hero__tile:nth-child(2) {
+    height: 100%;
+  }
+
+  .home-hero__tile img {
+    inset: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    border-radius: 11px;
+  }
+
+  .home-previews {
+    padding: 32px 0 48px;
+  }
+
+  .home-preview-list {
+    width: min(calc(100% - 28px), 560px);
+    gap: 12px;
+  }
+
+  .home-preview-card {
+    padding: 12px;
+    border-radius: 17px;
+  }
+
+  .home-preview-card__layout {
+    grid-template-columns: minmax(84px, 30%) minmax(0, 1fr);
+    grid-template-areas: "image copy";
+    align-items: center;
+    gap: 12px;
+  }
+
+  .home-preview-card__image {
+    height: 140px;
+    border-radius: 12px;
+  }
+
+  .home-preview-card__copy {
+    min-height: 140px;
+    padding: 2px 0;
+    gap: 10px;
+  }
+
+  .home-preview-card__copy h2 {
+    font-size: 17px;
+    line-height: 1.25;
+  }
+
+  .home-preview-card__copy .mt-sm {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .home-preview-card__copy > a {
+    min-height: 42px;
+    height: 42px;
+    padding-right: 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .home-hero__tiles {
+    height: 172px;
+    gap: 6px;
+  }
+
+  .home-preview-card__layout {
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .home-preview-card__image {
+    height: 132px;
+  }
+
+  .home-preview-card__copy {
+    min-height: 132px;
+    gap: 8px;
+  }
+}

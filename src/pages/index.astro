@@ -8,9 +8,9 @@ import Card from "../components/ui/Card.astro";
   <section class="home-hero relative w-full overflow-hidden text-left" data-enter>
     <div class="home-hero__inner wrap">
     <div class="home-hero__tiles" aria-hidden="true">
-      <div class="home-hero__tile"><img src="/anime/dandadan.jpg" alt="" /></div>
-      <div class="home-hero__tile"><img src="/anime/frieren.jpg" alt="" /></div>
-      <div class="home-hero__tile"><img src="/anime/kagurabachi.jpg" alt="" /></div>
+      <div class="home-hero__tile"><img class="is-active" src="/anime/dandadan.jpg" alt="" /><img src="/anime/apothecary-diaries.jpg" alt="" /></div>
+      <div class="home-hero__tile"><img class="is-active" src="/anime/frieren.jpg" alt="" /><img src="/anime/black-torch.jpg" alt="" /></div>
+      <div class="home-hero__tile"><img class="is-active" src="/anime/kagurabachi.jpg" alt="" /><img src="/anime/code-geass.jpg" alt="" /></div>
     </div>
 
     <div class="home-hero__content relative z-10 flex flex-col items-start gap-md">
@@ -172,7 +172,7 @@ import Card from "../components/ui/Card.astro";
           { transform: "translate3d(0, -24px, 0) rotate(0deg)", opacity: 0 },
           { transform: `translate3d(${drift}px, ${landingY - originY}px, 0) rotate(${rotation}deg)`, opacity: 0.58 },
         ],
-        { duration: 9000 + Math.random() * 8000, delay, easing: "linear", fill: "forwards" },
+        { duration: 22000 + Math.random() * 10000, delay, easing: "linear", fill: "forwards" },
       );
 
       fall.onfinish = () => {
@@ -188,7 +188,7 @@ import Card from "../components/ui/Card.astro";
       };
     };
 
-    for (let index = 0; index < 16; index += 1) releasePetal(0, index * 280);
+    for (let index = 0; index < 16; index += 1) releasePetal(0, index * 380);
 
     let lastScrollY = window.scrollY;
     let scrollDistance = 0;
@@ -202,5 +202,65 @@ import Card from "../components/ui/Card.astro";
         releasePetal(Math.max(0, currentScrollY - 24));
       }
     }, { passive: true });
+  }
+</script>
+
+<script>
+  const heroArtwork = [
+    "/anime/dandadan.jpg",
+    "/anime/frieren.jpg",
+    "/anime/kagurabachi.jpg",
+    "/anime/apothecary-diaries.jpg",
+    "/anime/black-torch.jpg",
+    "/anime/code-geass.jpg",
+    "/anime/dorohedoro.jpg",
+    "/anime/fullmetal-alchemist-brotherhood.jpg",
+    "/anime/ghost-in-the-shell.jpg",
+    "/anime/hajime-no-ippo.jpg",
+    "/anime/hunter-x-hunter.jpg",
+    "/anime/hyouka.jpg",
+    "/anime/jojo-steel-ball-run.jpg",
+    "/anime/steins-gate.jpg",
+    "/anime/vinland-saga.jpg",
+  ];
+  const heroTiles = Array.from(document.querySelectorAll<HTMLElement>(".home-hero__tile"));
+
+  if (heroTiles.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroArtwork.forEach((src) => {
+      const preload = new Image();
+      preload.src = src;
+    });
+
+    let nextArtwork = 0;
+    let nextTile = 0;
+    const rotateTile = () => {
+      const tile = heroTiles[nextTile % heroTiles.length];
+      const activeImage = tile.querySelector<HTMLImageElement>("img.is-active");
+      const nextImage = tile.querySelector<HTMLImageElement>("img:not(.is-active)");
+      if (!activeImage || !nextImage) return;
+
+      const visibleArtwork = new Set(heroTiles.map((item) => item.querySelector("img.is-active")?.getAttribute("src")));
+      let attempts = 0;
+
+      while (visibleArtwork.has(heroArtwork[nextArtwork]) && attempts < heroArtwork.length) {
+        nextArtwork = (nextArtwork + 1) % heroArtwork.length;
+        attempts += 1;
+      }
+
+      const replacement = heroArtwork[nextArtwork];
+      nextArtwork = (nextArtwork + 1) % heroArtwork.length;
+      nextTile += 1;
+      nextImage.src = replacement;
+
+      const crossfade = () => {
+        nextImage.classList.add("is-active");
+        activeImage.classList.remove("is-active");
+      };
+
+      if (nextImage.complete) requestAnimationFrame(crossfade);
+      else nextImage.decode().then(crossfade).catch(() => {});
+    };
+
+    window.setInterval(rotateTile, 6000);
   }
 </script>
